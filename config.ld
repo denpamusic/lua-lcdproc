@@ -8,3 +8,6 @@ readme = "README.md"
 description = [[
     lua-lcdproc is a humble LCDproc client written in Lua language.
 ]]
+examples = {
+    "examples/simple.lua"
+}

@@ -6,7 +6,7 @@
 -- @copyright denpamusic 2020
 
 local socket = require "socket"
-local Screen = require "lcdproc/screen"
+local Screen = require "lcdproc.screen"
 
 --- trim string
 -- @tparam string s a string to trim
@@ -82,9 +82,9 @@ LCDproc.__index = LCDproc
 
 
 --- create client instance
--- @tparam[opt] string host (localhost)
--- @tparam[opt] int port (13666)
--- @tparam[opt] bool debug (false)
+-- @tparam[opt] string host LCDproc server host (localhost)
+-- @tparam[opt] int port LCDproc server port (13666)
+-- @tparam[opt] bool debug enable debug mode debug (false)
 -- @treturn LCDproc the new LCDproc client
 function LCDproc.new(host, port, debug)
   local self = setmetatable({}, LCDproc)

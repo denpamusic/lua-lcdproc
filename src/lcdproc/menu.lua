@@ -27,7 +27,7 @@ end
 -- SHOULD NOT be used directly.
 -- @type Item
 local Item = {
-  menu = nil,      -- Menu object
+  menu = nil,      -- Menu instance
   id = nil,        -- item id
   text = nil,      -- item text
   hidden = false,  -- is item hidden
@@ -113,7 +113,7 @@ local Action = {
 Action.__index = Item
 
 --- add action to the menu
--- @tparam Menu menu Menu object
+-- @tparam Menu menu Menu instance
 -- @tparam string id action id
 -- @tparam string text action text
 -- @tparam string result result of action (none, close, quit)
@@ -165,7 +165,7 @@ local Checkbox = {
 Checkbox.__index = Checkbox
 
 --- create checkbox
--- @tparam Menu menu Menu object
+-- @tparam Menu menu Menu instance
 -- @tparam string id checkbox id
 -- @tparam string text checkbox text
 -- @tparam string value checkbox value (off, on, gray)
@@ -231,7 +231,7 @@ local Ring = {
 Ring.__index = Ring
 
 --- create ring
--- @tparam Menu menu Menu object
+-- @tparam Menu menu Menu instance
 -- @tparam string id ring id
 -- @tparam string text ring text
 -- @tparam string value index of currently selected string
@@ -297,7 +297,7 @@ local Slider = {
 Slider.__index = Slider
 
 --- create slider
--- @tparam Menu menu Menu object
+-- @tparam Menu menu Menu instance
 -- @tparam string id slider id
 -- @tparam string text slider text
 -- @tparam int value slider value
@@ -376,7 +376,7 @@ local Numeric = {
 Numeric.__index = Numeric
 
 --- create numeric
--- @tparam Menu menu Menu object
+-- @tparam Menu menu Menu instance
 -- @tparam string id numeric id
 -- @tparam string text numeric text
 -- @tparam int value numeric value
@@ -446,7 +446,7 @@ local Alpha = {
 Alpha.__index = Alpha
 
 --- create alpha
--- @tparam Menu menu Menu object
+-- @tparam Menu menu Menu instance
 -- @tparam string id alpha id
 -- @tparam string text alpha text
 -- @tparam string value alpha value
@@ -553,7 +553,7 @@ local Ip = {
 Ip.__index = Ip
 
 --- create ip
--- @tparam Menu menu Menu object
+-- @tparam Menu menu Menu instance
 -- @tparam string id ip address field id
 -- @tparam string text ip address field text
 -- @tparam string value ip address value

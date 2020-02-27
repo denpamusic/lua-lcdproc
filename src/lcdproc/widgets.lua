@@ -8,7 +8,7 @@
 --- A string widget class.
 -- @type String
 local String = {
-  screen = nil,   -- Screen object
+  screen = nil,   -- Screen instance
   id = nil,       -- widget id
   x = 0,          -- horizontal position
   y = 0,          -- vertical position
@@ -17,7 +17,7 @@ local String = {
 String.__index = String
 
 --- create string widget
--- @tparam Screen screen screen object
+-- @tparam Screen screen screen instance
 -- @tparam string id widget id
 -- @tparam int x horizontal position
 -- @tparam int y vertical position
@@ -74,7 +74,7 @@ end
 --- A title widget class.
 -- @type Title
 local Title = {
-  screen = nil,  -- Screen object
+  screen = nil,  -- Screen instance
   id = nil,      -- widget id
   text = nil     -- text to display
 }
@@ -122,7 +122,7 @@ end
 -- This SHOULD NOT be used directly.
 -- @type Bar
 local Bar = {
-  screen = nil,  -- Screen object
+  screen = nil,  -- Screen instance
   id = nil,      -- widget id
   x = 0,         -- horizontal position
   y = 0,         -- vertical position
@@ -131,7 +131,7 @@ local Bar = {
 Bar.__index = Bar
 
 --- create progress bar
--- @tparam Screen screen Screen object
+-- @tparam Screen screen Screen instance
 -- @tparam string id progress bar id
 -- @tparam int x horizontal position
 -- @tparam int y vertical position
@@ -195,7 +195,7 @@ local HBar = {}
 HBar.__index = HBar
 
 --- create horizontal progress bar widget
--- @tparam Screen screen object
+-- @tparam Screen screen instance
 -- @tparam string id widget id
 -- @tparam int x horizontal position
 -- @tparam int y vertical position
@@ -212,7 +212,7 @@ local VBar = {}
 VBar.__index = VBar
 
 --- create vertical progress bar widget
--- @tparam Screen screen object
+-- @tparam Screen screen instance
 -- @tparam string id widget id
 -- @tparam int x horizontal position
 -- @tparam int y vertical position
@@ -226,7 +226,7 @@ end
 --- Icon widget class.
 -- @type Icon
 local Icon = {
-  screen = nil,  -- Screen object
+  screen = nil,  -- Screen instance
   id = nil,      -- widget id
   x = 0,         -- horizontal position
   y = 0,         -- vertical position
@@ -262,7 +262,7 @@ Icon.icons = {
 Icon.__index = Icon
 
 --- create new icon widget
--- @tparam Screen screen object
+-- @tparam Screen screen instance
 -- @tparam string id widget id
 -- @tparam int x horizontal position
 -- @tparam int y vertical position
@@ -318,7 +318,7 @@ end
 --- A scroller widget class.
 -- @type Scroller
 local Scroller = {
-  screen = nil,     -- Screen object
+  screen = nil,     -- Screen instance
   id = nil,         -- widget id
   left = 0,         -- left side position
   top = 0,          -- top side position
@@ -331,7 +331,7 @@ local Scroller = {
 Scroller.__index = Scroller
 
 --- create scroller widget
--- @tparam Screen screen screen object
+-- @tparam Screen screen screen instance
 -- @tparam string id widget id
 -- @tparam int left left side position
 -- @tparam int top top side position
@@ -423,7 +423,7 @@ end
 --- Frame widget class.
 -- @type Frame
 local Frame = {
-  screen = nil,     -- Screen object
+  screen = nil,     -- Screen instance
   id = nil,         -- widget id
   left = 0,         -- left side position
   top = 0,          -- top side position
@@ -437,7 +437,7 @@ local Frame = {
 Frame.__index = Frame
 
 --- create frame widget
--- @tparam Screen screen object
+-- @tparam Screen screen instance
 -- @tparam string id widget id
 -- @tparam int left left side position
 -- @tparam int top top side position
@@ -534,7 +534,7 @@ end
 --- Big number widget class.
 -- @type Number
 local Number = {
-  screen = nil,  -- Screen object
+  screen = nil,  -- Screen instance
   id = nil,      -- widget id
   x = 0,         -- horizontal position
   number = 0     -- displayed number (0-9, 10 is semicolon)
@@ -542,7 +542,7 @@ local Number = {
 Number.__index = Number
 
 --- create big number widget
--- @tparam Screen screen screen object
+-- @tparam Screen screen screen instance
 -- @tparam string id widget id
 -- @tparam int x horizontal position
 -- @tparam int number displayed number (0-9, 10 is semicolon)
