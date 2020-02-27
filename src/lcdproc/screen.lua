@@ -241,8 +241,8 @@ end
 
 --- removes widget from the screen
 -- @param id widget id
-function Screen:del(id)
-  if self.widgets[id] and self.server:request("del " .. id) then
+function Screen:del_widget(id)
+  if self.widgets[id] and self.server:request("del_widget " .. id) then
     self.widgets[id] = nil
   end
 end
