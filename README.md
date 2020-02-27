@@ -3,6 +3,12 @@
 lua-lcdproc is a client for [LCDproc](https://github.com/lcdproc/lcdproc) server
 written in Lua language using LuaSocket.
 
+## Installation
+This project is available on [luarocks](https://luarocks.org/modules/denpamusic/lua-lcdproc).
+```
+$ luarocks install lua-lcdproc
+```
+
 ## Usage
 ```lua
 local LCDproc = require "lcdproc"
