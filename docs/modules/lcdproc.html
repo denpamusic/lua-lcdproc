@@ -1,0 +1,746 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>lua-lcdproc documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>lua-lcdproc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Class_LCDproc">Class LCDproc </a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><strong>lcdproc</strong></li>
+  <li><a href="../modules/lcdproc.menu.html">lcdproc.menu</a></li>
+  <li><a href="../modules/lcdproc.screen.html">lcdproc.screen</a></li>
+  <li><a href="../modules/lcdproc.widgets.html">lcdproc.widgets</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>lcdproc</code></h1>
+<p>A LCDproc client module.</p>
+<p>
+</p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Copyright</strong>: denpamusic 2020</li>
+        <li><strong>License</strong>: MIT</li>
+        <li><strong>Author</strong>: denpamusic</li>
+    </ul>
+
+
+<h2><a href="#Class_LCDproc">Class LCDproc </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#LCDproc.server">LCDproc.server</a></td>
+	<td class="summary">LCDproc server info</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LCDproc.display">LCDproc.display</a></td>
+	<td class="summary">LCDproc display info</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LCDproc.handlers">LCDproc.handlers</a></td>
+	<td class="summary">event handlers table</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LCDproc.new">LCDproc.new ([host[, port[, debug]]])</a></td>
+	<td class="summary">create client instance</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LCDproc:request">LCDproc:request (line)</a></td>
+	<td class="summary">make request to LCDproc server</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LCDproc:hello">LCDproc:hello ()</a></td>
+	<td class="summary">initiate the LCDproc session</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LCDproc:set_name">LCDproc:set_name (name)</a></td>
+	<td class="summary">set client name</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LCDproc:add_screen">LCDproc:add_screen (id)</a></td>
+	<td class="summary">add new screen</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LCDproc:del_screen">LCDproc:del_screen (id)</a></td>
+	<td class="summary">remove screen</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LCDproc:add_key">LCDproc:add_key (id, mode)</a></td>
+	<td class="summary">add new key</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LCDproc:del_key">LCDproc:del_key (id)</a></td>
+	<td class="summary">remove key</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LCDproc:add_menu">LCDproc:add_menu ()</a></td>
+	<td class="summary">add main menu to the client</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LCDproc:backlight">LCDproc:backlight (state)</a></td>
+	<td class="summary">set display backlight state</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LCDproc:output">LCDproc:output (state)</a></td>
+	<td class="summary">set display gpio state</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LCDproc:info">LCDproc:info ()</a></td>
+	<td class="summary">get display driver info</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LCDproc:noop">LCDproc:noop ()</a></td>
+	<td class="summary">do nothing</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LCDproc:sleep">LCDproc:sleep (seconds)</a></td>
+	<td class="summary">sleep for a given amount of seconds</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LCDproc:poll">LCDproc:poll ()</a></td>
+	<td class="summary">poll connection</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LCDproc:on_listen">LCDproc:on_listen (fn)</a></td>
+	<td class="summary">register screen listen event handler</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LCDproc:on_ignore">LCDproc:on_ignore (fn)</a></td>
+	<td class="summary">register screen ignore event handler</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LCDproc:on_keypress">LCDproc:on_keypress (fn)</a></td>
+	<td class="summary">register key press event handler</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LCDproc:on_menu">LCDproc:on_menu (fn)</a></td>
+	<td class="summary">register menu event handler</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#LCDproc:close">LCDproc:close ()</a></td>
+	<td class="summary">close connection</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header has-description"><a name="Class_LCDproc"></a>Class LCDproc </h2>
+
+          <div class="section-description">
+          A LCDproc client class.
+          </div>
+    <dl class="function">
+    <dt>
+    <a name = "LCDproc.server"></a>
+    <strong>LCDproc.server</strong>
+    </dt>
+    <dd>
+    LCDproc server info
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">version</span>
+        LCDproc version
+        </li>
+        <li><span class="parameter">protocol</span>
+        protocol version
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "LCDproc.display"></a>
+    <strong>LCDproc.display</strong>
+    </dt>
+    <dd>
+    LCDproc display info
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">width</span>
+        display width
+        </li>
+        <li><span class="parameter">height</span>
+        display height
+        </li>
+        <li><span class="parameter">cell_width</span>
+        display cell width
+        </li>
+        <li><span class="parameter">cell_height</span>
+        display cell height
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "LCDproc.handlers"></a>
+    <strong>LCDproc.handlers</strong>
+    </dt>
+    <dd>
+    event handlers table
+
+
+    <h3>Fields:</h3>
+    <ul>
+        <li><span class="parameter">listen</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "LCDproc.new"></a>
+    <strong>LCDproc.new ([host[, port[, debug]]])</strong>
+    </dt>
+    <dd>
+    create client instance
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">host</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         (localhost)
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">port</span>
+            <span class="types"><span class="type">int</span></span>
+         (13666)
+         (<em>optional</em>)
+        </li>
+        <li><span class="parameter">debug</span>
+            <span class="types"><span class="type">bool</span></span>
+         (false)
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../modules/lcdproc.html#LCDproc">LCDproc</a></span>
+        the new LCDproc client
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "LCDproc:request"></a>
+    <strong>LCDproc:request (line)</strong>
+    </dt>
+    <dd>
+    make request to LCDproc server
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">line</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "LCDproc:hello"></a>
+    <strong>LCDproc:hello ()</strong>
+    </dt>
+    <dd>
+    initiate the LCDproc session
+
+
+
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/lcdproc.html#LCDproc.new">new</a>
+    </ul>
+
+
+</dd>
+    <dt>
+    <a name = "LCDproc:set_name"></a>
+    <strong>LCDproc:set_name (name)</strong>
+    </dt>
+    <dd>
+    set client name
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "LCDproc:add_screen"></a>
+    <strong>LCDproc:add_screen (id)</strong>
+    </dt>
+    <dd>
+    add new screen
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         screen id
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">Screen</span></span>
+        the new screen
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "LCDproc:del_screen"></a>
+    <strong>LCDproc:del_screen (id)</strong>
+    </dt>
+    <dd>
+    remove screen
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         screen id
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "LCDproc:add_key"></a>
+    <strong>LCDproc:add_key (id, mode)</strong>
+    </dt>
+    <dd>
+    add new key
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         key id
+        </li>
+        <li><span class="parameter">mode</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         (exclusively, shared)
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "LCDproc:del_key"></a>
+    <strong>LCDproc:del_key (id)</strong>
+    </dt>
+    <dd>
+    remove key
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         key id
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "LCDproc:add_menu"></a>
+    <strong>LCDproc:add_menu ()</strong>
+    </dt>
+    <dd>
+    add main menu to the client
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><span class="type">Menu</span></span>
+        the main menu
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "LCDproc:backlight"></a>
+    <strong>LCDproc:backlight (state)</strong>
+    </dt>
+    <dd>
+    set display backlight state
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">state</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         backlight state (on | off | toggle | blink | flash)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "LCDproc:output"></a>
+    <strong>LCDproc:output (state)</strong>
+    </dt>
+    <dd>
+    set display gpio state
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">state</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         (on | off | number)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "LCDproc:info"></a>
+    <strong>LCDproc:info ()</strong>
+    </dt>
+    <dd>
+    get display driver info
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "LCDproc:noop"></a>
+    <strong>LCDproc:noop ()</strong>
+    </dt>
+    <dd>
+    do nothing
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "LCDproc:sleep"></a>
+    <strong>LCDproc:sleep (seconds)</strong>
+    </dt>
+    <dd>
+    sleep for a given amount of seconds
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">seconds</span>
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "LCDproc:poll"></a>
+    <strong>LCDproc:poll ()</strong>
+    </dt>
+    <dd>
+    poll connection
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "LCDproc:on_listen"></a>
+    <strong>LCDproc:on_listen (fn)</strong>
+    </dt>
+    <dd>
+    register screen listen event handler
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fn</span>
+            <span class="types"><span class="type">func</span></span>
+         handler function
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "LCDproc:on_ignore"></a>
+    <strong>LCDproc:on_ignore (fn)</strong>
+    </dt>
+    <dd>
+    register screen ignore event handler
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fn</span>
+            <span class="types"><span class="type">func</span></span>
+         handler function
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "LCDproc:on_keypress"></a>
+    <strong>LCDproc:on_keypress (fn)</strong>
+    </dt>
+    <dd>
+    register key press event handler
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fn</span>
+            <span class="types"><span class="type">func</span></span>
+         handler function
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "LCDproc:on_menu"></a>
+    <strong>LCDproc:on_menu (fn)</strong>
+    </dt>
+    <dd>
+    register menu event handler
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">fn</span>
+            <span class="types"><span class="type">func</span></span>
+         handler function
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "LCDproc:close"></a>
+    <strong>LCDproc:close ()</strong>
+    </dt>
+    <dd>
+    close connection
+
+
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2020-02-27 14:06:08 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

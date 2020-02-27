@@ -1,0 +1,204 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>lua-lcdproc documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>lua-lcdproc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Class_BarWidget">Class BarWidget </a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/lcdproc.html">lcdproc</a></li>
+  <li><a href="../modules/lcdproc.screen.html">lcdproc.screen</a></li>
+  <li><strong>lcdproc.widget.bar</strong></li>
+  <li><a href="../modules/lcdproc.widget.frame.html">lcdproc.widget.frame</a></li>
+  <li><a href="../modules/lcdproc.widget.hbar.html">lcdproc.widget.hbar</a></li>
+  <li><a href="../modules/lcdproc.widget.icon.html">lcdproc.widget.icon</a></li>
+  <li><a href="../modules/lcdproc.widget.html">lcdproc.widget</a></li>
+  <li><a href="../modules/lcdproc.widget.number.html">lcdproc.widget.number</a></li>
+  <li><a href="../modules/lcdproc.widget.scroller.html">lcdproc.widget.scroller</a></li>
+  <li><a href="../modules/lcdproc.widget.string.html">lcdproc.widget.string</a></li>
+  <li><a href="../modules/lcdproc.widget.title.html">lcdproc.widget.title</a></li>
+  <li><a href="../modules/lcdproc.widget.vbar.html">lcdproc.widget.vbar</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>lcdproc.widget.bar</code></h1>
+<p>A progress bar widget module.</p>
+<p></p>
+    <h3>See also:</h3>
+    <ul>
+         <li><a href="../modules/lcdproc.widget.hbar.html#">lcdproc.widget.hbar</a></li>
+         <li><a href="../modules/lcdproc.widget.vbar.html#">lcdproc.widget.vbar</a></li>
+    </ul>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Copyright</strong>: denpamusic 2020</li>
+        <li><strong>License</strong>: MIT</li>
+        <li><strong>Author</strong>: denpamusic</li>
+    </ul>
+
+
+<h2><a href="#Class_BarWidget">Class BarWidget </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#BarWidget:update">BarWidget:update ()</a></td>
+	<td class="summary">update progress bar on the server</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#BarWidget:set_position">BarWidget:set_position (x, y)</a></td>
+	<td class="summary">set progress bar position</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#BarWidget:set_length">BarWidget:set_length (length)</a></td>
+	<td class="summary">set progress bar length</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header has-description"><a name="Class_BarWidget"></a>Class BarWidget </h2>
+
+          <div class="section-description">
+          Parent class of HBarWidget and VBarWidget.
+ SHOULD NOT be used directly.
+          </div>
+    <dl class="function">
+    <dt>
+    <a name = "BarWidget:update"></a>
+    <strong>BarWidget:update ()</strong>
+    </dt>
+    <dd>
+    update progress bar on the server
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "BarWidget:set_position"></a>
+    <strong>BarWidget:set_position (x, y)</strong>
+    </dt>
+    <dd>
+    set progress bar position
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">int</span></span>
+         horizontal position
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">int</span></span>
+         vertical position
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "BarWidget:set_length"></a>
+    <strong>BarWidget:set_length (length)</strong>
+    </dt>
+    <dd>
+    set progress bar length
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">length</span>
+            <span class="types"><span class="type">int</span></span>
+         progress bar length
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2020-02-24 01:47:42 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

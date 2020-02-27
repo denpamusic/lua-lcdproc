@@ -1,0 +1,803 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>lua-lcdproc documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>lua-lcdproc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Class_Screen">Class Screen </a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/lcdproc.html">lcdproc</a></li>
+  <li><a href="../modules/lcdproc.menu.html">lcdproc.menu</a></li>
+  <li><strong>lcdproc.screen</strong></li>
+  <li><a href="../modules/lcdproc.widgets.html">lcdproc.widgets</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>lcdproc.screen</code></h1>
+<p>A LCDproc screen module.</p>
+<p>
+</p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Copyright</strong>: denpamusic 2020</li>
+        <li><strong>License</strong>: MIT</li>
+        <li><strong>Author</strong>: denpamusic</li>
+    </ul>
+
+
+<h2><a href="#Class_Screen">Class Screen </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Screen.new">Screen.new (server, id)</a></td>
+	<td class="summary">create LCDproc screen</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Screen:set_name">Screen:set_name (name)</a></td>
+	<td class="summary">set screen name</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Screen:set_size">Screen:set_size (width, height)</a></td>
+	<td class="summary">set screen size</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Screen:set_priority">Screen:set_priority (priority)</a></td>
+	<td class="summary">set screen priority</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Screen:set_heartbeat">Screen:set_heartbeat (heartbeat)</a></td>
+	<td class="summary">set screen heartbeat state</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Screen:set_backlight">Screen:set_backlight (backlight)</a></td>
+	<td class="summary">set screen backlight state</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Screen:set_duration">Screen:set_duration (duration)</a></td>
+	<td class="summary">set display duration</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Screen:set_timeout">Screen:set_timeout (timeout)</a></td>
+	<td class="summary">set display timeout</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Screen:set_cursor">Screen:set_cursor (cursor, x, y)</a></td>
+	<td class="summary">set cursor state</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Screen:add_string">Screen:add_string (id, x, y, text)</a></td>
+	<td class="summary">add string widget to the screen</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Screen:add_title">Screen:add_title (id, text)</a></td>
+	<td class="summary">add title widget to the screen</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Screen:add_hbar">Screen:add_hbar (id, x, y, length)</a></td>
+	<td class="summary">add horizontal progress bar to the screen</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Screen:add_vbar">Screen:add_vbar (id, x, y, length)</a></td>
+	<td class="summary">add vertical progress bar to the screen</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Screen:add_icon">Screen:add_icon (id, x, y, icon)</a></td>
+	<td class="summary">add icon to the screen</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Screen:add_scroller">Screen:add_scroller (id, left, top, right, bottom, direction, speed, text)</a></td>
+	<td class="summary">add scroller to the screen</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Screen:add_frame">Screen:add_frame (id, left, top, right, bottom, width, height, direction, speed)</a></td>
+	<td class="summary">add frame widget to the screen</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Screen:add_number">Screen:add_number (id, x, number)</a></td>
+	<td class="summary">add number widget to the screen</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Screen:del">Screen:del (id)</a></td>
+	<td class="summary">removes widget from the screen</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header has-description"><a name="Class_Screen"></a>Class Screen </h2>
+
+          <div class="section-description">
+          LCDproc Screen class.
+          </div>
+    <dl class="function">
+    <dt>
+    <a name = "Screen.new"></a>
+    <strong>Screen.new (server, id)</strong>
+    </dt>
+    <dd>
+    create LCDproc screen
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">server</span>
+            <span class="types"><span class="type">LCDproc</span></span>
+         LCDproc server instance
+        </li>
+        <li><span class="parameter">id</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         screen id
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../modules/lcdproc.screen.html#Screen">Screen</a></span>
+        the new screen
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Screen:set_name"></a>
+    <strong>Screen:set_name (name)</strong>
+    </dt>
+    <dd>
+    set screen name
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         screen name to set
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        response from LCDproc server</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Screen:set_size"></a>
+    <strong>Screen:set_size (width, height)</strong>
+    </dt>
+    <dd>
+    set screen size
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">int</span></span>
+         screen width
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">int</span></span>
+         screen height
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        response from LCDproc server</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Screen:set_priority"></a>
+    <strong>Screen:set_priority (priority)</strong>
+    </dt>
+    <dd>
+    set screen priority
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">priority</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         screen priority
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        response from LCDproc server</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Screen:set_heartbeat"></a>
+    <strong>Screen:set_heartbeat (heartbeat)</strong>
+    </dt>
+    <dd>
+    set screen heartbeat state
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">heartbeat</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         screen heartbeat state
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        response from LCDproc server</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Screen:set_backlight"></a>
+    <strong>Screen:set_backlight (backlight)</strong>
+    </dt>
+    <dd>
+    set screen backlight state
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">backlight</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         screen backlight state
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        response from LCDproc server</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Screen:set_duration"></a>
+    <strong>Screen:set_duration (duration)</strong>
+    </dt>
+    <dd>
+    set display duration
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">duration</span>
+            <span class="types"><span class="type">int</span></span>
+         display screen for this amount of seconds in rotation
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        response from LCDproc server</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Screen:set_timeout"></a>
+    <strong>Screen:set_timeout (timeout)</strong>
+    </dt>
+    <dd>
+    set display timeout
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">timeout</span>
+            <span class="types"><span class="type">int</span></span>
+         display screen for this amount of seconds
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        response from LCDproc server</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Screen:set_cursor"></a>
+    <strong>Screen:set_cursor (cursor, x, y)</strong>
+    </dt>
+    <dd>
+    set cursor state
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">cursor</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         new cursor state
+        </li>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">int</span></span>
+         cursor horizontal position
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">int</span></span>
+         cursor vertical position
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        response from LCDproc server</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Screen:add_string"></a>
+    <strong>Screen:add_string (id, x, y, text)</strong>
+    </dt>
+    <dd>
+    add string widget to the screen
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         widget id
+        </li>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">int</span></span>
+         horizontal position
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">int</span></span>
+         vertical position
+        </li>
+        <li><span class="parameter">text</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         widget text
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../modules/lcdproc.widgets.html#String">widgets.String</a></span>
+        the new string widget
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Screen:add_title"></a>
+    <strong>Screen:add_title (id, text)</strong>
+    </dt>
+    <dd>
+    add title widget to the screen
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         widget id
+        </li>
+        <li><span class="parameter">text</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         widget text
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../modules/lcdproc.widgets.html#Title">widgets.Title</a></span>
+        the new title widget
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Screen:add_hbar"></a>
+    <strong>Screen:add_hbar (id, x, y, length)</strong>
+    </dt>
+    <dd>
+    add horizontal progress bar to the screen
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         widget id
+        </li>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">int</span></span>
+         horizontal position
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">int</span></span>
+         vertical position
+        </li>
+        <li><span class="parameter">length</span>
+            <span class="types"><span class="type">int</span></span>
+         progress bar length
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../modules/lcdproc.widgets.html#HBar">widgets.HBar</a></span>
+        the new horizontal progress bar widget
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Screen:add_vbar"></a>
+    <strong>Screen:add_vbar (id, x, y, length)</strong>
+    </dt>
+    <dd>
+    add vertical progress bar to the screen
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         widget id
+        </li>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">int</span></span>
+         horizontal position
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">int</span></span>
+         vertical position
+        </li>
+        <li><span class="parameter">length</span>
+            <span class="types"><span class="type">int</span></span>
+         progress bar length
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../modules/lcdproc.widgets.html#VBar">widgets.VBar</a></span>
+        the new vertical progress bar widget
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Screen:add_icon"></a>
+    <strong>Screen:add_icon (id, x, y, icon)</strong>
+    </dt>
+    <dd>
+    add icon to the screen
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         widget id
+        </li>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">int</span></span>
+         horizontal position
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">int</span></span>
+         vertical position
+        </li>
+        <li><span class="parameter">icon</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         icon name
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../modules/lcdproc.widgets.html#Icon">widgets.Icon</a></span>
+        the new icon widget
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Screen:add_scroller"></a>
+    <strong>Screen:add_scroller (id, left, top, right, bottom, direction, speed, text)</strong>
+    </dt>
+    <dd>
+    add scroller to the screen
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         widget id
+        </li>
+        <li><span class="parameter">left</span>
+            <span class="types"><span class="type">int</span></span>
+         left side position
+        </li>
+        <li><span class="parameter">top</span>
+            <span class="types"><span class="type">int</span></span>
+         top side position
+        </li>
+        <li><span class="parameter">right</span>
+            <span class="types"><span class="type">int</span></span>
+         right side position
+        </li>
+        <li><span class="parameter">bottom</span>
+            <span class="types"><span class="type">int</span></span>
+         bottom side position
+        </li>
+        <li><span class="parameter">direction</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         scroll direction (h, v, m)
+        </li>
+        <li><span class="parameter">speed</span>
+            <span class="types"><span class="type">int</span></span>
+         scroll speed
+        </li>
+        <li><span class="parameter">text</span>
+            <span class="types"><span class="type">int</span></span>
+         scroller text
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../modules/lcdproc.widgets.html#Scroller">widgets.Scroller</a></span>
+        the new scroller widget
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Screen:add_frame"></a>
+    <strong>Screen:add_frame (id, left, top, right, bottom, width, height, direction, speed)</strong>
+    </dt>
+    <dd>
+    add frame widget to the screen
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         widget id
+        </li>
+        <li><span class="parameter">left</span>
+            <span class="types"><span class="type">int</span></span>
+         left side position
+        </li>
+        <li><span class="parameter">top</span>
+            <span class="types"><span class="type">int</span></span>
+         top side position
+        </li>
+        <li><span class="parameter">right</span>
+            <span class="types"><span class="type">int</span></span>
+         right side position
+        </li>
+        <li><span class="parameter">bottom</span>
+            <span class="types"><span class="type">int</span></span>
+         bottom side position
+        </li>
+        <li><span class="parameter">width</span>
+            <span class="types"><span class="type">int</span></span>
+         frame width
+        </li>
+        <li><span class="parameter">height</span>
+            <span class="types"><span class="type">int</span></span>
+         frame height
+        </li>
+        <li><span class="parameter">direction</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         scroll direction (h, v)
+        </li>
+        <li><span class="parameter">speed</span>
+            <span class="types"><span class="type">int</span></span>
+         scroll speed
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../modules/lcdproc.widgets.html#Frame">widgets.Frame</a></span>
+        the new frame widget
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Screen:add_number"></a>
+    <strong>Screen:add_number (id, x, number)</strong>
+    </dt>
+    <dd>
+    add number widget to the screen
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         widget id
+        </li>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">int</span></span>
+         horizontal position
+        </li>
+        <li><span class="parameter">number</span>
+            <span class="types"><span class="type">int</span></span>
+         (0-9, 10 is semicolon)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../modules/lcdproc.widgets.html#Number">widgets.Number</a></span>
+        the new number widget
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Screen:del"></a>
+    <strong>Screen:del (id)</strong>
+    </dt>
+    <dd>
+    removes widget from the screen
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+         widget id
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2020-02-27 14:06:08 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

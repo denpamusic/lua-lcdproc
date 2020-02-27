@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>lua-lcdproc documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>lua-lcdproc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Class_NumberWidget">Class NumberWidget </a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/lcdproc.html">lcdproc</a></li>
+  <li><a href="../modules/lcdproc.screen.html">lcdproc.screen</a></li>
+  <li><a href="../modules/lcdproc.widget.bar.html">lcdproc.widget.bar</a></li>
+  <li><a href="../modules/lcdproc.widget.frame.html">lcdproc.widget.frame</a></li>
+  <li><a href="../modules/lcdproc.widget.hbar.html">lcdproc.widget.hbar</a></li>
+  <li><a href="../modules/lcdproc.widget.icon.html">lcdproc.widget.icon</a></li>
+  <li><a href="../modules/lcdproc.widget.html">lcdproc.widget</a></li>
+  <li><strong>lcdproc.widget.number</strong></li>
+  <li><a href="../modules/lcdproc.widget.scroller.html">lcdproc.widget.scroller</a></li>
+  <li><a href="../modules/lcdproc.widget.string.html">lcdproc.widget.string</a></li>
+  <li><a href="../modules/lcdproc.widget.title.html">lcdproc.widget.title</a></li>
+  <li><a href="../modules/lcdproc.widget.vbar.html">lcdproc.widget.vbar</a></li>
+</ul>
+<h2>Topics</h2>
+<ul class="">
+  <li><a href="../topics/README.md.html">README</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>lcdproc.widget.number</code></h1>
+<p>A big number widget module.</p>
+<p></p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Copyright</strong>: denpamusic 2020</li>
+        <li><strong>License</strong>: MIT</li>
+        <li><strong>Author</strong>: denpamusic</li>
+    </ul>
+
+
+<h2><a href="#Class_NumberWidget">Class NumberWidget </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#NumberWidget.new">NumberWidget.new (screen, id, x, number)</a></td>
+	<td class="summary">create big number widget</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#NumberWidget:update">NumberWidget:update ()</a></td>
+	<td class="summary">update big number on the server</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#NumberWidget:set_position">NumberWidget:set_position (x)</a></td>
+	<td class="summary">set big number position</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#NumberWidget:set_number">NumberWidget:set_number (number)</a></td>
+	<td class="summary">set displayed number</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header has-description"><a name="Class_NumberWidget"></a>Class NumberWidget </h2>
+
+          <div class="section-description">
+          Big number widget class.
+          </div>
+    <dl class="function">
+    <dt>
+    <a name = "NumberWidget.new"></a>
+    <strong>NumberWidget.new (screen, id, x, number)</strong>
+    </dt>
+    <dd>
+    create big number widget
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">screen</span>
+            <span class="types"><span class="type">Screen</span></span>
+         screen object
+        </li>
+        <li><span class="parameter">id</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         widget id
+        </li>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">int</span></span>
+         horizontal position
+        </li>
+        <li><span class="parameter">number</span>
+            <span class="types"><span class="type">int</span></span>
+         displayed number (0-9, 10 is semicolon)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../modules/lcdproc.widget.number.html#NumberWidget">NumberWidget</a></span>
+        the new number widget
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "NumberWidget:update"></a>
+    <strong>NumberWidget:update ()</strong>
+    </dt>
+    <dd>
+    update big number on the server
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "NumberWidget:set_position"></a>
+    <strong>NumberWidget:set_position (x)</strong>
+    </dt>
+    <dd>
+    set big number position
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">int</span></span>
+         horizontal position
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "NumberWidget:set_number"></a>
+    <strong>NumberWidget:set_number (number)</strong>
+    </dt>
+    <dd>
+    set displayed number
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">number</span>
+            <span class="types"><span class="type">int</span></span>
+         displayed number (0-9, 10 is semicolon)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2020-02-24 01:47:42 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
