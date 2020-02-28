@@ -91,6 +91,8 @@ function LCDproc.new(host, port, debug)
   self.debug = debug or false
   self.sock = assert(socket.tcp())
   self.sock:settimeout(3)
+  self.keys = {}
+  self.screens = {}
   local ret, err = self.sock:connect((host or "localhost"), (port or 13666))
   if ret then
     self:hello()
