@@ -95,6 +95,9 @@ function Item:set_next(next)
 end
 
 --- add optional arguments to request line
+-- @local
+-- @tparam string pattern a pattern to create request with
+-- @param ... arguments for a pattern
 -- @treturn string request line with added optional args
 function Item:with_args(pattern, ...)
   local line = string.format(pattern, unpack(arg))
@@ -135,7 +138,7 @@ end
 
 --- update action on the server
 -- @treturn string LCDproc server response
--- @treturn error description
+-- @treturn string error description
 function Action:update()
   return self.menu.server:request(
     self:with_args(
@@ -150,7 +153,7 @@ end
 --- set action result
 -- @tparam string result result of action (none, close, quit)
 -- @treturn string LCDproc server response
--- @treturn error description
+-- @treturn string error description
 function Action:set_result(result)
   self.result = result
   return self:update()

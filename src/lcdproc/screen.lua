@@ -200,7 +200,7 @@ end
 -- @tparam int bottom bottom side position
 -- @tparam string direction scroll direction (h, v, m)
 -- @tparam int speed scroll speed
--- @tparam int text scroller text
+-- @tparam string text scroller text
 -- @treturn widgets.Scroller the new scroller widget
 function Screen:add_scroller(
   id, left, top, right, bottom, direction, speed, text)

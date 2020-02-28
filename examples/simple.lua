@@ -1,5 +1,3 @@
-package.path = package.path .. ";../src/?.lua"
-
 local LCDproc = require "lcdproc"
 
 local lcd = LCDproc.new("172.30.5.252", 13666)
