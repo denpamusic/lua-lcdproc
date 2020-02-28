@@ -347,7 +347,7 @@ function Scroller.new(
   self.screen = screen
   self.id = id
   self.left = left
-  left.top = top
+  self.top = top
   self.right = right
   self.bottom = bottom
   self.direction = direction
@@ -366,7 +366,7 @@ end
 -- @treturn string error description
 function Scroller:update()
   return self.screen.server:request(
-    string.format("widget_set %s %s %i %i %i %i %s %i %s",
+    string.format("widget_set %s %s %i %i %i %i %s %i {%s}",
       self.screen.id,
       self.id,
       self.left,
