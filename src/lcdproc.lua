@@ -64,9 +64,9 @@ LCDproc.display = {
 -- @table events
 -- @local
 LCDproc.events = {
-  listen = "listen ([%a%d%p]+)",                  -- screen listen pattern
-  ignore = "ignore ([%a%d%p]+)",                  -- screen ignore pattern
-  keypress = "key ([%a%d%p]+)",                   -- key event pattern
+  listen = "listen ([%a%d%p]+)",                    -- screen listen pattern
+  ignore = "ignore ([%a%d%p]+)",                    -- screen ignore pattern
+  keypress = "key ([%a%d%p]+)",                     -- key event pattern
   menu = "menuevent (%a+) ([%a%d%p]+) ([%a%d%p]+)"  -- menu event pattern
 }
 

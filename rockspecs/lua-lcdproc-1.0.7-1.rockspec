@@ -1,8 +1,8 @@
 package = "lua-lcdproc"
-version = "1.0.6-1"
+version = "1.0.7-1"
 source = {
   url = "git://github.com/denpamusic/lua-lcdproc.git",
-  tag = "v1.0.6"
+  tag = "v1.0.7"
 }
 description = {
   summary = "LCDproc client for Lua",
