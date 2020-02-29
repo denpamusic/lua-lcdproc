@@ -89,10 +89,12 @@ LCDproc.__index = LCDproc
 function LCDproc.new(host, port, debug)
   local self = setmetatable({}, LCDproc)
   self.debug = debug or false
+  self.keys = LCDproc.keys
+  self.screens = LCDproc.screens
+  self.events = LCDproc.events
+  self.handlers = LCDproc.handlers
   self.sock = assert(socket.tcp())
   self.sock:settimeout(3)
-  self.keys = {}
-  self.screens = {}
   local ret, err = self.sock:connect((host or "localhost"), (port or 13666))
   if ret then
     self:hello()

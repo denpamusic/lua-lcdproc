@@ -632,7 +632,7 @@ Menu.__index = Menu
 function Menu.new(server, menu, id, text, hidden, prev)
   local self = Item.new(Menu, menu, id, text, hidden, prev)
   self.server = server
-  self.items = {}
+  self.items = Menu.items
 
   -- main menu is already defined on server
   -- so there's no need to create a request
