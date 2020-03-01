@@ -49,8 +49,11 @@ function Widget:create()
 end
 
 --- delete widget on the server
+-- @treturn string LCDproc server response
+-- @treturn string error description
 function Widget:delete()
-  return self.screen.server:request(("widget_del %s"):format(self.id))
+  return self.screen.server:request(
+    ("widget_del %s %s"):format(self.screen.id, self.id))
 end
 
 --- A string widget class.
@@ -243,7 +246,7 @@ end
 local Icon = {
   x = 0,         -- horizontal position
   y = 0,         -- vertical position
-  icon = nil,    -- icon name
+  icon = nil     -- icon name
 }
 
 --- list of available icons
@@ -526,8 +529,6 @@ end
 --- Big number widget class.
 -- @type Number
 local Number = {
-  screen = nil,  -- Screen instance
-  id = nil,      -- widget id
   x = 0,         -- horizontal position
   number = 0     -- displayed number (0-9, 10 is semicolon)
 }

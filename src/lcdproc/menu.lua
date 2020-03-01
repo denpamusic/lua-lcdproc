@@ -57,13 +57,21 @@ function Item:new(menu, id, text, hidden, prev, next)
 end
 
 --- initialize item on the server
--- @treturn string LCDproc server response
+-- @return initialized item
 -- @treturn string error description
 function Item:init(vars)
   for k, v in pairs(vars) do self[k] = v end
   local ret, err = self:create()
   if not ret then self = nil end
   return self, err
+end
+
+--- delete item on the server
+-- @treturn string LCDproc server response
+-- @treturn string error description
+function Item:delete()
+  return self.menu.server:request(
+    ('menu_del_item "%s" %s'):format(self.menu.id, self.id))
 end
 
 --- set item text
@@ -664,7 +672,7 @@ end
 -- @treturn string error description
 function Menu:create()
   -- main menu always exists on the server side
-  if self.id === "" then return true, nil end
+  if self.id == "" then return true, nil end
 
   return self.server:request(
     self:with_args(
@@ -677,7 +685,7 @@ end
 -- @treturn string LCDproc server response
 -- @treturn string error description
 function Menu:update()
-  if self.id === "" then return nil, "main menu can't be updated" end
+  if self.id == "" then return nil, "main menu can't be updated" end
 
   return self.server:request(
     self:with_args(
@@ -798,6 +806,14 @@ end
 function Menu:add_menu(id, text, hidden, prev)
   self.items[id] = Menu.new(self.server, self, id, text, hidden, prev)
   return self.items[id]
+end
+
+--- remove item from the menu
+-- @tparam string id item id
+function Menu:del_item(id)
+  if self.items[id] and self.items[id]:delete() then
+    self.items[id] = nil
+  end
 end
 
 return Menu

@@ -239,10 +239,10 @@ function Screen:add_number(id, x, number)
   return self.widgets[id]
 end
 
---- removes widget from the screen
+--- remove widget from the screen
 -- @param id widget id
 function Screen:del_widget(id)
-  if self.widgets[id] and self.widgets[id].delete() then
+  if self.widgets[id] and self.widgets[id]:delete() then
     self.widgets[id] = nil
   end
 end
