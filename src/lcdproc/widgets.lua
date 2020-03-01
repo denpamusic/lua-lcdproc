@@ -5,11 +5,57 @@
 -- @license MIT
 -- @copyright denpamusic 2020
 
+--- A widget abstract class.
+-- @type Widget
+local Widget = {
+  screen = nil,   -- Screen instance
+  id = nil,       -- widget id
+  type = nil      -- widget type
+}
+Widget.__index = Widget
+
+--- create new widget
+-- @tparam Screen screen Screen instance
+-- @tparam string id widget id
+-- @tparam string type widget type
+-- @return the new widget
+function Widget:new(screen, id, type)
+  setmetatable(self, { __index = Widget })
+  local newinst = setmetatable({}, self)
+  newinst.id = id
+  newinst.screen = screen
+  newinst.type = type
+  return newinst
+end
+
+--- initialize widget on the server
+-- @return string initialized widget
+-- @treturn string error description
+function Widget:init(vars)
+  for k, v in pairs(vars) do self[k] = v end
+  local ret, err = self:create()
+  if not ret then return nil, err end
+  ret, err = self:update()
+  if not ret then return nil, err end
+  return self, nil
+end
+
+--- create widget on the server
+-- @treturn string LCDproc server response
+-- @treturn string error description
+function Widget:create()
+  return self.screen.server:request(
+    ("widget_add %s %s %s"):format(self.screen.id, self.id, self.type))
+end
+
+--- delete widget on the server
+function Widget:delete()
+  return self.screen.server:request(("widget_del %s"):format(self.id))
+end
+
 --- A string widget class.
 -- @type String
 local String = {
-  screen = nil,   -- Screen instance
-  id = nil,       -- widget id
   x = 0,          -- horizontal position
   y = 0,          -- vertical position
   text = nil      -- text to display
@@ -24,18 +70,8 @@ String.__index = String
 -- @tparam string text text to display
 -- @treturn String then new string widget
 function String.new(screen, id, x, y, text)
-  local self = setmetatable({}, String)
-  self.screen = screen
-  self.id = id
-  self.x = x
-  self.y = y
-  self.text = text
-  if self.screen.server:request(
-    string.format("widget_add %s %s string",
-      self.screen.id,
-      self.id)) and self:update() then
-        return self
-  end
+  local self = Widget.new(String, screen, id, "string")
+  return self:init{x = x, y = y, text = text}
 end
 
 --- update string on the server
@@ -43,7 +79,7 @@ end
 -- @treturn string error description
 function String:update()
   return self.screen.server:request(
-    string.format("widget_set %s %s %i %i {%s}",
+    ("widget_set %s %s %i %i {%s}"):format(
       self.screen.id,
       self.id,
       self.x,
@@ -86,16 +122,8 @@ Title.__index = Title
 -- @tparam string text text to display
 -- @treturn Title the new title widget
 function Title.new(screen, id, text)
-  local self = setmetatable({}, Title)
-  self.screen = screen
-  self.id = id
-  self.text = text
-  if self.screen.server:request(
-    string.format("widget_add %s %s title",
-      self.screen.id,
-      self.id)) and self:update() then
-        return self
-  end
+  local self = Widget.new(Title, screen, id, "title")
+  return self:init{ text = text }
 end
 
 --- update title on the server
@@ -122,11 +150,10 @@ end
 -- This SHOULD NOT be used directly.
 -- @type Bar
 local Bar = {
-  screen = nil,  -- Screen instance
-  id = nil,      -- widget id
   x = 0,         -- horizontal position
   y = 0,         -- vertical position
-  length = 0     -- progress bar length
+  length = 0,    -- progress bar length
+  type = nil     -- progress bar type
 }
 Bar.__index = Bar
 
@@ -139,20 +166,8 @@ Bar.__index = Bar
 -- @tparam string type progress bar type (hbar, vbar)
 -- @return the new bar
 function Bar:new(screen, id, x, y, length, type)
-  setmetatable(self, { __index = Bar })
-  local newinst = setmetatable({}, self)
-  newinst.screen = screen
-  newinst.id = id
-  newinst.x = x
-  newinst.y = y
-  newinst.length = length
-  if newinst.screen.server:request(
-    string.format("widget_add %s %s %s",
-      type,
-      newinst.screen.id,
-      newinst.id)) and newinst:update() then
-        return newinst
-  end
+  local newinst = Widget.new(Bar, screen, id, type)
+  return newinst:init{ x = x, y = y, length = length }
 end
 
 --- update progress bar on the server
@@ -160,7 +175,7 @@ end
 -- @treturn string error description
 function Bar:update()
   return self.screen.server:request(
-    string.format("widget_set %s %s %i %i %i",
+   ("widget_set %s %s %i %i %i"):format(
       self.screen.id,
       self.id,
       self.x,
@@ -226,8 +241,6 @@ end
 --- Icon widget class.
 -- @type Icon
 local Icon = {
-  screen = nil,  -- Screen instance
-  id = nil,      -- widget id
   x = 0,         -- horizontal position
   y = 0,         -- vertical position
   icon = nil,    -- icon name
@@ -236,28 +249,28 @@ local Icon = {
 --- list of available icons
 -- @table icons
 Icon.icons = {
-  "BLOCK_FILLED",
-  "HEART_OPEN",
-  "HEART_FILLED",
-  "ARROW_UP",
-  "ARROW_DOWN",
-  "ARROW_LEFT",
-  "ARROW_RIGHT",
-  "CHECKBOX_OFF",
-  "CHECKBOX_ON",
-  "CHECKBOX_GRAY",
-  "SELECTOR_AT_LEFT",
-  "SELECTOR_AT_RIGHT",
-  "ELLIPSIS",
-  "STOP",
-  "PAUSE",
-  "PLAY",
-  "PLAYR",
-  "FF",
-  "FR",
-  "NEXT",
-  "PREV",
-  "REC"
+  ["BLOCK_FILLED"]      = 1,
+  ["HEART_OPEN"]        = 2,
+  ["HEART_FILLED"]      = 3,
+  ["ARROW_UP"]          = 4,
+  ["ARROW_DOWN"]        = 5,
+  ["ARROW_LEFT"]        = 6,
+  ["ARROW_RIGHT"]       = 7,
+  ["CHECKBOX_OFF"]      = 8,
+  ["CHECKBOX_ON"]       = 9,
+  ["CHECKBOX_GRAY"]     = 10,
+  ["SELECTOR_AT_LEFT"]  = 11,
+  ["SELECTOR_AT_RIGHT"] = 12,
+  ["ELLIPSIS"]          = 13,
+  ["STOP"]              = 14,
+  ["PAUSE"]             = 15,
+  ["PLAY"]              = 16,
+  ["PLAYR"]             = 17,
+  ["FF"]                = 18,
+  ["FR"]                = 19,
+  ["NEXT"]              = 20,
+  ["PREV"]              = 21,
+  ["REC"]               = 22
 }
 Icon.__index = Icon
 
@@ -270,17 +283,12 @@ Icon.__index = Icon
 -- @see icons
 -- @treturn Icon the new icon widget
 function Icon.new(screen, id, x, y, icon)
-  local self = setmetatable({}, Icon)
-  self.id = id
-  self.x = x
-  self.y = y
-  self.icon = icon
-  if self.screen.server:request(
-    string.format("widget_add %s %s icon",
-      self.screen.id,
-      self.id)) and self:update() then
-        return self
+  if not self.icons[icon] then
+    error(("invalid icon [%s]"):format(self.icons[icon]), 2)
   end
+
+  local self = Widget.new(Icon, screen, id, "icon")
+  return self:init{ x = x, y = y, icon = icon }
 end
 
 --- update icon on the server
@@ -288,7 +296,7 @@ end
 -- @treturn string error description
 function Icon:update()
   return self.screen.server:request(
-    string.format("widget_set %s %s %i %i %s",
+    ("widget_set %s %s %i %i %s"):format(
       self.screen.id,
       self.id,
       self.x,
@@ -318,8 +326,6 @@ end
 --- A scroller widget class.
 -- @type Scroller
 local Scroller = {
-  screen = nil,     -- Screen instance
-  id = nil,         -- widget id
   left = 0,         -- left side position
   top = 0,          -- top side position
   right = 0,        -- right side position
@@ -343,22 +349,16 @@ Scroller.__index = Scroller
 -- @treturn Scroller the new scroller widget
 function Scroller.new(
   screen, id, left, top, right, bottom, direction, speed, text)
-  local self = setmetatable({}, Scroller)
-  self.screen = screen
-  self.id = id
-  self.left = left
-  self.top = top
-  self.right = right
-  self.bottom = bottom
-  self.direction = direction
-  self.speed = speed
-  self.text = text
-  if self.screen.server:request(
-    string.format("widget_add %s %s scroller",
-      self.screen.id,
-      self.id)) and self:update() then
-        return self
-  end
+  local self = Widget.new(Scroller, screen, id, "scroller")
+  return self:init{
+    left = left,
+    top = top,
+    right = right,
+    bottom = bottom,
+    direction = direction,
+    speed = speed,
+    text = text
+  }
 end
 
 --- update scroller
@@ -366,7 +366,7 @@ end
 -- @treturn string error description
 function Scroller:update()
   return self.screen.server:request(
-    string.format("widget_set %s %s %i %i %i %i %s %i {%s}",
+    ("widget_set %s %s %i %i %i %i %s %i {%s}"):format(
       self.screen.id,
       self.id,
       self.left,
@@ -423,8 +423,6 @@ end
 --- Frame widget class.
 -- @type Frame
 local Frame = {
-  screen = nil,     -- Screen instance
-  id = nil,         -- widget id
   left = 0,         -- left side position
   top = 0,          -- top side position
   right = 0,        -- right side position
@@ -450,23 +448,17 @@ Frame.__index = Frame
 -- @treturn Frame then new frame widget
 function Frame.new(
   screen, id, left, top, right, bottom, width, height, direction, speed)
-  local self = setmetatable({}, Frame)
-  self.screen = screen
-  self.id = id
-  self.left = left
-  left.top = top
-  self.right = right
-  self.bottom = bottom
-  self.width = width
-  self.height = height
-  self.direction = direction
-  self.speed = speed
-  if self.screen.server:request(
-    string.format("widget_add %s %s frame",
-      self.screen.id,
-      self.id)) and self:update() then
-        return self
-  end
+  local self = Widget.new(Frame, screen, id, "frame")
+  return self:init{
+    left = left,
+    top = top,
+    right = right,
+    bottom = bottom,
+    width = width,
+    height = height,
+    direction = direction,
+    speed = speed,
+  }
 end
 
 --- update frame on the server
@@ -474,7 +466,7 @@ end
 -- @treturn string error description
 function Frame:update()
   return self.screen.server:request(
-    string.format("widget_set %s %s %i %i %i %i %s %i %s",
+    ("widget_set %s %s %i %i %i %i %s %i %s"):format(
       self.screen.id,
       self.id,
       self.left,
@@ -548,17 +540,8 @@ Number.__index = Number
 -- @tparam int number displayed number (0-9, 10 is semicolon)
 -- @treturn Number the new number widget
 function Number.new(screen, id, x, number)
-  local self = setmetatable({}, Number)
-  self.screen = screen
-  self.id = id
-  self.x = x
-  self.number = number
-  if self.screen.server:request(
-    string.format("widget_add %s %s num",
-      self.screen.id,
-      self.id)) and self:update() then
-        return self
-  end
+  local self = Widget.new(Number, screen, id, "num")
+  return self:init{ x = x, number = number }
 end
 
 --- update big number on the server
@@ -566,7 +549,7 @@ end
 -- @treturn string error description
 function Number:update()
   return self.screen.server:request(
-    string.format("widget_set %s %s %i %i",
+    ("widget_set %s %s %i %i"):format(
       self.screen.id,
       self.id,
       self.x,

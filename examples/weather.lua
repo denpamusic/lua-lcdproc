@@ -9,7 +9,7 @@ local cityid = "<CITYID>"
 local appid = "<APPID>"
 
 --- fetches and decodes json from openweathermap.org
-local function api_get(p)
+function api_get(p)
     local url  = ("http://api.openweathermap.org/data/2.5/" ..
     p .. "?id=%i&appid=%s"):format(cityid, appid)
     local data = http.request(url)

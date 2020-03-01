@@ -84,6 +84,10 @@
 	<td class="summary">create new item</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#Item:init">Item:init (vars)</a></td>
+	<td class="summary">initialize item on the server</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#Item:set_text">Item:set_text (text)</a></td>
 	<td class="summary">set item text</td>
 	</tr>
@@ -107,6 +111,10 @@
 	<td class="summary">add action to the menu</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#Action:create">Action:create ()</a></td>
+	<td class="summary">create action on the server</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#Action:update">Action:update ()</a></td>
 	<td class="summary">update action on the server</td>
 	</tr>
@@ -120,6 +128,10 @@
 	<tr>
 	<td class="name" nowrap><a href="#Checkbox.new">Checkbox.new (menu, id, text, value, allow_gray, hidden, prev)</a></td>
 	<td class="summary">create checkbox</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Checkbox:create">Checkbox:create ()</a></td>
+	<td class="summary">create checkbox on the server</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#Checkbox:update">Checkbox:update ()</a></td>
@@ -141,6 +153,10 @@
 	<td class="summary">create ring</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#Ring:create">Ring:create ()</a></td>
+	<td class="summary">create ring on the server</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#Ring:update">Ring:update ()</a></td>
 	<td class="summary">update ring on the server</td>
 	</tr>
@@ -158,6 +174,10 @@
 	<tr>
 	<td class="name" nowrap><a href="#Slider.new">Slider.new (menu, id, text, value, range, labels, step, hidden, prev, next)</a></td>
 	<td class="summary">create slider</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Slider:create">Slider:create ()</a></td>
+	<td class="summary">create slider on the server</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#Slider:update">Slider:update ()</a></td>
@@ -179,6 +199,10 @@
 	<td class="summary">create numeric</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#Numeric:create">Numeric:create ()</a></td>
+	<td class="summary">create numeric on the server</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#Numeric:update">Numeric:update ()</a></td>
 	<td class="summary">update numeric on the server</td>
 	</tr>
@@ -198,8 +222,12 @@
 	<td class="summary">create alpha</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#Alpha:create">Alpha:create ()</a></td>
+	<td class="summary">create alpha on the server</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#Alpha:update">Alpha:update ()</a></td>
-	<td class="summary">update alpha</td>
+	<td class="summary">update alpha on the server</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#Alpha:set_value">Alpha:set_value (value)</a></td>
@@ -225,8 +253,12 @@
 	<td class="summary">create ip</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#Ip:create">Ip:create ()</a></td>
+	<td class="summary">create ip address on the server</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#Ip:update">Ip:update ()</a></td>
-	<td class="summary">update ip address</td>
+	<td class="summary">update ip address on the server</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#Ip:set_value">Ip:set_value (value)</a></td>
@@ -242,6 +274,10 @@
 	<tr>
 	<td class="name" nowrap><a href="#Menu.new">Menu.new (server, menu, id, text, hidden, prev)</a></td>
 	<td class="summary">create menu</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Menu:create">Menu:create ()</a></td>
+	<td class="summary">create menu on the server</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#Menu:update">Menu:update ()</a></td>
@@ -288,7 +324,7 @@
     <h2 class="section-header has-description"><a name="Class_Item"></a>Class Item </h2>
 
           <div class="section-description">
-          Menu item parent class.
+          Menu item abstract class.
  SHOULD NOT be used directly.
           </div>
     <dl class="function">
@@ -332,6 +368,36 @@
     <ol>
 
         the new item
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Item:init"></a>
+    <strong>Item:init (vars)</strong>
+    </dt>
+    <dd>
+    initialize item on the server
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">vars</span>
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
     </ol>
 
 
@@ -513,6 +579,29 @@
 
 </dd>
     <dt>
+    <a name = "Action:create"></a>
+    <strong>Action:create ()</strong>
+    </dt>
+    <dd>
+    create action on the server
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
     <a name = "Action:update"></a>
     <strong>Action:update ()</strong>
     </dt>
@@ -617,6 +706,29 @@
 
            <span class="types"><a class="type" href="../modules/lcdproc.menu.html#Checkbox">Checkbox</a></span>
         the new checkbox
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Checkbox:create"></a>
+    <strong>Checkbox:create ()</strong>
+    </dt>
+    <dd>
+    create checkbox on the server
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
     </ol>
 
 
@@ -758,6 +870,29 @@
 
            <span class="types"><a class="type" href="../modules/lcdproc.menu.html#Ring">Ring</a></span>
         the new ring
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Ring:create"></a>
+    <strong>Ring:create ()</strong>
+    </dt>
+    <dd>
+    create ring on the server
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
     </ol>
 
 
@@ -918,6 +1053,29 @@
 
 </dd>
     <dt>
+    <a name = "Slider:create"></a>
+    <strong>Slider:create ()</strong>
+    </dt>
+    <dd>
+    create slider on the server
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
     <a name = "Slider:update"></a>
     <strong>Slider:update ()</strong>
     </dt>
@@ -1056,6 +1214,29 @@
 
            <span class="types"><a class="type" href="../modules/lcdproc.menu.html#Numeric">Numeric</a></span>
         the new numeric
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Numeric:create"></a>
+    <strong>Numeric:create ()</strong>
+    </dt>
+    <dd>
+    create numeric on the server
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
     </ol>
 
 
@@ -1220,11 +1401,34 @@
 
 </dd>
     <dt>
+    <a name = "Alpha:create"></a>
+    <strong>Alpha:create ()</strong>
+    </dt>
+    <dd>
+    create alpha on the server
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
     <a name = "Alpha:update"></a>
     <strong>Alpha:update ()</strong>
     </dt>
     <dd>
-    update alpha
+    update alpha on the server
 
 
 
@@ -1425,11 +1629,34 @@
 
 </dd>
     <dt>
+    <a name = "Ip:create"></a>
+    <strong>Ip:create ()</strong>
+    </dt>
+    <dd>
+    create ip address on the server
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
     <a name = "Ip:update"></a>
     <strong>Ip:update ()</strong>
     </dt>
     <dd>
-    update ip address
+    update ip address on the server
 
 
 
@@ -1555,6 +1782,29 @@
 
            <span class="types"><a class="type" href="../modules/lcdproc.menu.html#Menu">Menu</a></span>
         the new menu
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Menu:create"></a>
+    <strong>Menu:create ()</strong>
+    </dt>
+    <dd>
+    create menu on the server
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
     </ol>
 
 
@@ -1991,7 +2241,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2020-03-01 05:03:04 </i>
+<i style="float:right;">Last updated 2020-03-01 05:05:32 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

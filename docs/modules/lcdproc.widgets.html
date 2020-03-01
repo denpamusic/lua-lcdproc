@@ -32,6 +32,7 @@
 
 <h2>Contents</h2>
 <ul>
+<li><a href="#Class_Widget">Class Widget </a></li>
 <li><a href="#Class_String">Class String </a></li>
 <li><a href="#Class_Title">Class Title </a></li>
 <li><a href="#Class_Bar">Class Bar </a></li>
@@ -77,6 +78,25 @@
     </ul>
 
 
+<h2><a href="#Class_Widget">Class Widget </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Widget:new">Widget:new (screen, id, type)</a></td>
+	<td class="summary">create new widget</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Widget:init">Widget:init (vars)</a></td>
+	<td class="summary">initialize widget on the server</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Widget:create">Widget:create ()</a></td>
+	<td class="summary">create widget on the server</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Widget:delete">Widget:delete ()</a></td>
+	<td class="summary">delete widget on the server</td>
+	</tr>
+</table>
 <h2><a href="#Class_String">Class String </a></h2>
 <table class="function_list">
 	<tr>
@@ -249,6 +269,113 @@
 <br/>
 
 
+    <h2 class="section-header has-description"><a name="Class_Widget"></a>Class Widget </h2>
+
+          <div class="section-description">
+          A widget abstract class.
+          </div>
+    <dl class="function">
+    <dt>
+    <a name = "Widget:new"></a>
+    <strong>Widget:new (screen, id, type)</strong>
+    </dt>
+    <dd>
+    create new widget
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">screen</span>
+            <span class="types"><span class="type">Screen</span></span>
+         Screen instance
+        </li>
+        <li><span class="parameter">id</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         widget id
+        </li>
+        <li><span class="parameter">type</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         widget type
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the new widget
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Widget:init"></a>
+    <strong>Widget:init (vars)</strong>
+    </dt>
+    <dd>
+    initialize widget on the server
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">vars</span>
+
+
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+        string initialized widget</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Widget:create"></a>
+    <strong>Widget:create ()</strong>
+    </dt>
+    <dd>
+    create widget on the server
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        LCDproc server response</li>
+        <li>
+           <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+        error description</li>
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Widget:delete"></a>
+    <strong>Widget:delete ()</strong>
+    </dt>
+    <dd>
+    delete widget on the server
+
+
+
+
+
+
+
+</dd>
+</dl>
     <h2 class="section-header has-description"><a name="Class_String"></a>Class String </h2>
 
           <div class="section-description">
@@ -743,91 +870,91 @@
 
     <h3>Fields:</h3>
     <ul>
-        <li><span class="parameter">BLOCK_FILLED</span>
+        <li><span class="parameter">[BLOCK_FILLED]</span>
 
 
         </li>
-        <li><span class="parameter">HEART_OPEN</span>
+        <li><span class="parameter">[HEART_OPEN]</span>
 
 
         </li>
-        <li><span class="parameter">HEART_FILLED</span>
+        <li><span class="parameter">[HEART_FILLED]</span>
 
 
         </li>
-        <li><span class="parameter">ARROW_UP</span>
+        <li><span class="parameter">[ARROW_UP]</span>
 
 
         </li>
-        <li><span class="parameter">ARROW_DOWN</span>
+        <li><span class="parameter">[ARROW_DOWN]</span>
 
 
         </li>
-        <li><span class="parameter">ARROW_LEFT</span>
+        <li><span class="parameter">[ARROW_LEFT]</span>
 
 
         </li>
-        <li><span class="parameter">ARROW_RIGHT</span>
+        <li><span class="parameter">[ARROW_RIGHT]</span>
 
 
         </li>
-        <li><span class="parameter">CHECKBOX_OFF</span>
+        <li><span class="parameter">[CHECKBOX_OFF]</span>
 
 
         </li>
-        <li><span class="parameter">CHECKBOX_ON</span>
+        <li><span class="parameter">[CHECKBOX_ON]</span>
 
 
         </li>
-        <li><span class="parameter">CHECKBOX_GRAY</span>
+        <li><span class="parameter">[CHECKBOX_GRAY]</span>
 
 
         </li>
-        <li><span class="parameter">SELECTOR_AT_LEFT</span>
+        <li><span class="parameter">[SELECTOR_AT_LEFT]</span>
 
 
         </li>
-        <li><span class="parameter">SELECTOR_AT_RIGHT</span>
+        <li><span class="parameter">[SELECTOR_AT_RIGHT]</span>
 
 
         </li>
-        <li><span class="parameter">ELLIPSIS</span>
+        <li><span class="parameter">[ELLIPSIS]</span>
 
 
         </li>
-        <li><span class="parameter">STOP</span>
+        <li><span class="parameter">[STOP]</span>
 
 
         </li>
-        <li><span class="parameter">PAUSE</span>
+        <li><span class="parameter">[PAUSE]</span>
 
 
         </li>
-        <li><span class="parameter">PLAY</span>
+        <li><span class="parameter">[PLAY]</span>
 
 
         </li>
-        <li><span class="parameter">PLAYR</span>
+        <li><span class="parameter">[PLAYR]</span>
 
 
         </li>
-        <li><span class="parameter">FF</span>
+        <li><span class="parameter">[FF]</span>
 
 
         </li>
-        <li><span class="parameter">FR</span>
+        <li><span class="parameter">[FR]</span>
 
 
         </li>
-        <li><span class="parameter">NEXT</span>
+        <li><span class="parameter">[NEXT]</span>
 
 
         </li>
-        <li><span class="parameter">PREV</span>
+        <li><span class="parameter">[PREV]</span>
 
 
         </li>
-        <li><span class="parameter">REC</span>
+        <li><span class="parameter">[REC]</span>
 
 
         </li>
@@ -1594,7 +1721,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2020-03-01 05:03:04 </i>
+<i style="float:right;">Last updated 2020-03-01 05:05:32 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

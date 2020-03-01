@@ -23,7 +23,7 @@ local function in_table(s, t)
   return false
 end
 
---- Menu item parent class.
+--- Menu item abstract class.
 -- SHOULD NOT be used directly.
 -- @type Item
 local Item = {
@@ -48,12 +48,22 @@ function Item:new(menu, id, text, hidden, prev, next)
   setmetatable(self, { __index = Item })
   local newinst = setmetatable({}, self)
   newinst.menu = menu
-  newinst.id = id or ""
+  newinst.id = id
   newinst.text = text
   newinst.hidden = hidden or false
   newinst.prev = prev
   newinst.next = next
   return newinst
+end
+
+--- initialize item on the server
+-- @treturn string LCDproc server response
+-- @treturn string error description
+function Item:init(vars)
+  for k, v in pairs(vars) do self[k] = v end
+  local ret, err = self:create()
+  if not ret then self = nil end
+  return self, err
 end
 
 --- set item text
@@ -125,15 +135,19 @@ Action.__index = Item
 -- @treturn Action the new action
 function Action.new(menu, id, text, result, hidden, prev)
   local self = Item.new(Action, menu, id, text, hidden, prev)
-  self.result = result or "none"
-  if self.menu.server:request(
+  return self:init{ result = (result or "none") }
+end
+
+--- create action on the server
+-- @treturn string LCDproc server response
+-- @treturn string error description
+function Action:create()
+  return self.menu.server:request(
     self:with_args(
       'menu_add_item "%s" %s action -menu_result %s',
       self.menu.id,
       self.id,
-      self.result
-    )
-  ) then return self end
+      self.result))
 end
 
 --- update action on the server
@@ -145,9 +159,7 @@ function Action:update()
       'menu_set_item "%s" %s menu_result %s',
       self.menu.id,
       self.id,
-      self.result
-    )
-  )
+      self.result))
 end
 
 --- set action result
@@ -178,18 +190,20 @@ Checkbox.__index = Checkbox
 -- @treturn Checkbox the new checkbox
 function Checkbox.new(menu, id, text, value, allow_gray, hidden, prev)
   local self = Item.new(Checkbox, menu, id, text, hidden, prev)
-  self.value = value
-  self.allow_gray = allow_gray or false
+  return self:init{ value = value, allow_gray = (allow_gray or false) }
+end
 
-  if self.menu.server:request(
+--- create checkbox on the server
+-- @treturn string LCDproc server response
+-- @treturn string error description
+function Checkbox:create()
+  return self.menu.server:request(
     self:with_args(
       'menu_add_item "%s" %s checkbox -value %s -allow_gray %s',
       self.menu.id,
       self.id,
       self.value,
-      btos(self.allow_gray)
-    )
-  ) then return self end
+      btos(self.allow_gray)))
 end
 
 --- update checkbox on the server
@@ -202,9 +216,7 @@ function Checkbox:update()
       self.menu.id,
       self.id,
       self.value,
-      btos(self.allow_gray)
-    )
-  )
+      btos(self.allow_gray)))
 end
 
 --- set checkbox value
@@ -244,17 +256,20 @@ Ring.__index = Ring
 -- @treturn Ring the new ring
 function Ring.new(menu, id, text, value, strings, hidden, prev)
   local self = Item.new(Ring, menu, id, text, hidden, prev)
-  self.value = value or 0
-  self.strings = strings or {}
-  if self.menu.server:request(
+  return self:init{ value = (value or 0), strings = (strings or {}) }
+end
+
+--- create ring on the server
+-- @treturn string LCDproc server response
+-- @treturn string error description
+function Ring:create()
+  return self.menu.server:request(
     self:with_args(
       'menu_add_item "%s" %s ring -value %s -strings {%s}',
       self.menu.id,
       self.id,
       self.value,
-      table.concat(self.strings, "\t")
-    )
-  ) then return self end
+      table.concat(self.strings, "\t")))
 end
 
 --- update ring on the server
@@ -267,9 +282,7 @@ function Ring:update()
       self.menu.id,
       self.id,
       self.value,
-      table.concat(self.strings, "\t")
-    )
-  )
+      table.concat(self.strings, "\t")))
 end
 
 --- set ring value
@@ -314,11 +327,19 @@ Slider.__index = Slider
 function Slider.new(
     menu, id, text, value, range, labels, step, hidden, prev, next)
   local self = Item.new(Slider, menu, id, text, hidden, prev, next)
-  self.value = value or 0
-  self.range = range or { 0, 100 }
-  self.labels = labels or { "", "" }
-  self.step = step or 1
-  if self.menu.server:request(
+  return self:init{
+    value = (value or 0),
+    range = (range or { 0, 100 }),
+    labels = (labels or { "", "" }),
+    step = (step or 1)
+  }
+end
+
+--- create slider on the server
+-- @treturn string LCDproc server response
+-- @treturn string error description
+function Slider:create()
+  return self.menu.server:request(
     self:with_args(
       'menu_add_item "%s" %s slider -value %i ' ..
       '-mintext {%s} -maxtext {%s} -minvalue %i -maxvalue %i',
@@ -328,9 +349,7 @@ function Slider.new(
       self.labels[1],
       self.labels[2],
       self.range[1],
-      self.range[2]
-    )
-  ) then return self end
+      self.range[2]))
 end
 
 --- update slider on the server
@@ -347,9 +366,7 @@ function Slider:update()
       self.labels[1],
       self.labels[2],
       self.range[1],
-      self.range[2]
-    )
-  )
+      self.range[2]))
 end
 
 --- set slider value
@@ -390,18 +407,21 @@ Numeric.__index = Numeric
 -- @treturn Numeric the new numeric
 function Numeric.new(menu, id, text, value, range, hidden, prev, next)
   local self = Item.new(Numeric, menu, id, text, hidden, prev, next)
-  self.value = value or 0
-  self.range = range or { 0, 100 }
-  if self.menu.server:request(
+  return self:init{ value = (value or 0), range = (range or { 0, 100 }) }
+end
+
+--- create numeric on the server
+-- @treturn string LCDproc server response
+-- @treturn string error description
+function Numeric:create()
+  return self.menu.server:request(
     self:with_args(
       'menu_add_item "%s" %s numeric -value %i -minvalue %i -maxvalue %i',
       self.menu.id,
       self.id,
       self.value,
       self.range[1],
-      self.range[2]
-    )
-  ) then return self end
+      self.range[2]))
 end
 
 --- update numeric on the server
@@ -464,12 +484,20 @@ Alpha.__index = Alpha
 function Alpha.new(
     menu, id, text, value, mask, range, allowed, extra, hidden, prev, next)
   local self = Item.new(Alpha, menu, id, text, hidden, prev, next)
-  self.value = value or ""
-  self.mask = mask or ""
-  self.range = range or { 0, 10 }
-  self.allowed = allowed or { ":upper:" }
-  self.extra = extra or ""
-  if self.menu.server:request(
+  return self:init{
+    value = (value or ""),
+    mask = (mask or ""),
+    range = (range or { 0 , 10 }),
+    allowed = (allowed or { ":upper:" }),
+    extra = (extra or "")
+  }
+end
+
+--- create alpha on the server
+-- @treturn string LCDproc server response
+-- @treturn string error description
+function Alpha:create()
+  return self.menu.server:request(
     self:with_args(
       'menu_add_item "%s" %s alpha -value {%s} -password_char "%s" -minlength %i ' ..
       '-maxlength %i -allow_caps %s -allow_noncaps %s -allow_numbers %s ' ..
@@ -483,12 +511,10 @@ function Alpha.new(
       btos(in_table(":upper:", self.allowed)),
       btos(in_table(":lower:", self.allowed)),
       btos(in_table(":digit:", self.allowed)),
-      self.extra
-    )
-  ) then return self end
+      self.extra))
 end
 
---- update alpha
+--- update alpha on the server
 -- @treturn string LCDproc server response
 -- @treturn string error description
 function Alpha:update()
@@ -506,9 +532,7 @@ function Alpha:update()
       btos(in_table(":upper:", self.allowed)),
       btos(in_table(":lower:", self.allowed)),
       btos(in_table(":digit:", self.allowed)),
-      self.extra
-    )
-  )
+      self.extra))
 end
 
 --- set alpha value
@@ -567,20 +591,23 @@ Ip.__index = Ip
 -- @treturn Ip the new ip address field
 function Ip.new(menu, id, text, value, v6, hidden, prev, next)
   local self = Item.new(Ip, menu, id, text, hidden, prev, next)
-  self.value = value
-  self.v6 = v6 or false
-  if self.menu.server:request(
+  return self:init{ value = value, v6 = (v6 or false) }
+end
+
+--- create ip address on the server
+-- @treturn string LCDproc server response
+-- @treturn string error description
+function Ip:create()
+  return self.menu.server:request(
     self:with_args(
       'menu_add_item "%s" %s ip -value "%s" -v6 %s',
       self.menu.id,
       self.id,
       self.value,
-      btos(self.v6)
-    )
-  ) then return self end
+      btos(self.v6)))
 end
 
---- update ip address
+--- update ip address on the server
 -- @treturn string LCDproc server response
 -- @treturn string error description
 function Ip:update()
@@ -590,9 +617,7 @@ function Ip:update()
       self.menu.id,
       self.id,
       self.value,
-      btos(self.v6)
-    )
-  )
+      btos(self.v6)))
 end
 
 --- set ip address value
@@ -630,38 +655,35 @@ Menu.__index = Menu
 -- @tparam Item prev item to show after pressing ESCAPE key
 -- @treturn Menu the new menu
 function Menu.new(server, menu, id, text, hidden, prev)
-  local self = Item.new(Menu, menu, id, text, hidden, prev)
-  self.server = server
-  self.items = Menu.items
+  local self = Item.new(Menu, menu, (id or ""), text, hidden, prev)
+  return self:init{ server = server, items = Menu.items }
+end
 
-  -- main menu is already defined on server
-  -- so there's no need to create a request
-  if self.id == "" then
-    return self
-  end
+--- create menu on the server
+-- @treturn string LCDproc server response
+-- @treturn string error description
+function Menu:create()
+  -- main menu always exists on the server side
+  if self.id === "" then return true, nil end
 
-  if self.server:request(
+  return self.server:request(
     self:with_args(
       'menu_add_item "%s" %s menu',
       self.menu.id,
-      self.id
-    )
-  ) then return self end
+      self.id))
 end
 
 --- update menu on the server
 -- @treturn string LCDproc server response
 -- @treturn string error description
 function Menu:update()
-  if self.id ~= "" then
-    return self.server:request(
-      self:with_args(
-        'menu_set_item "%s" %s',
-        self.menu.id,
-        self.id
-      )
-    )
-  end
+  if self.id === "" then return nil, "main menu can't be updated" end
+
+  return self.server:request(
+    self:with_args(
+      'menu_set_item "%s" %s',
+      self.menu.id,
+      self.id))
 end
 
 --- add action to the menu
