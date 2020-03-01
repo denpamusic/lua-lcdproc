@@ -245,9 +245,9 @@ function LCDproc:poll()
   local canread = socket.select({ self.sock }, nil, 1)
   for _, c in ipairs(canread) do
     local line, err = self.sock:receive("*l")
-    if self.debug then print("<<< [poll] " .. line) end
 
     if line then
+      if self.debug then print("<<< [poll] " .. line) end
       do_events(self, line)
     end
 
