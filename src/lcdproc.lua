@@ -84,17 +84,18 @@ LCDproc.__index = LCDproc
 --- create client instance
 -- @tparam[opt] string host LCDproc server host (localhost)
 -- @tparam[opt] int port LCDproc server port (13666)
--- @tparam[opt] bool debug enable debug mode debug (false)
+-- @tparam[opt] table opts additional options ({ timeout = 3, debug = false })
 -- @treturn LCDproc the new LCDproc client
-function LCDproc.new(host, port, debug)
+function LCDproc.new(host, port, opts)
   local self = setmetatable({}, LCDproc)
-  self.debug = debug or false
-  self.keys = LCDproc.keys
+  opts = opts or {}
+  self.debug = opts.debug or false
   self.screens = LCDproc.screens
+  self.keys = LCDproc.keys
   self.events = LCDproc.events
   self.handlers = LCDproc.handlers
   self.sock = assert(socket.tcp())
-  self.sock:settimeout(3)
+  self.sock:settimeout(opts.timeout or 3)
   local ret, err = self.sock:connect((host or "localhost"), (port or 13666))
   if ret then
     self:hello()
