@@ -9,6 +9,14 @@ This project is available on [luarocks](https://luarocks.org/modules/denpamusic/
 $ luarocks install lua-lcdproc
 ```
 
+## OpenWrt
+You can get OpenWRT package from [my feed](https://github.com/denpamusic/openwrt-feed):
+```
+$ wget -P /etc/opkg/keys/ http://openwrt.denpa.pro/keys/4b148d164b058d87
+$ echo src/gz denpamusic http://openwrt.denpa.pro/packages >> /etc/opkg/customfeeds.conf
+$ opkg update && opkg install lua-lcdproc
+```
+
 ## Usage
 ```lua
 local LCDproc = require "lcdproc"
