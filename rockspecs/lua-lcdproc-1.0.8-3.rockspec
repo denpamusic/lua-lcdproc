@@ -1,5 +1,5 @@
 package = "lua-lcdproc"
-version = "1.0.8-1"
+version = "1.0.8-3"
 source = {
   url = "git://github.com/denpamusic/lua-lcdproc.git",
   tag = "v1.0.8"
@@ -14,15 +14,15 @@ description = {
 }
 dependencies = {
   "lua >= 5.1",
-  "luasocket >= 3.0"
+  "luasocket"
 }
 build = {
   type = "builtin",
   modules = {
     ["lcdproc"]         = "src/lcdproc.lua",
-    ["lcdproc.menu"]    = "src/luaproc/menu.lua",
-    ["lcdproc.screen"]  = "src/luaproc/screen.lua",
-    ["lcdproc.widgets"] = "src/luaproc/widgets.lua"
+    ["lcdproc.menu"]    = "src/lcdproc/menu.lua",
+    ["lcdproc.screen"]  = "src/lcdproc/screen.lua",
+    ["lcdproc.widgets"] = "src/lcdproc/widgets.lua"
   },
   copy_directories = {
     "docs",
