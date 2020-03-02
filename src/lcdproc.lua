@@ -15,25 +15,6 @@ local function trim(s)
   return s:match "^%s*(.-)%s*$"
 end
 
---- handle server events
--- @tparam LCDproc c LCDproc client
--- @tparam string l response line
-local function do_events(c, l)
-  for k, v in pairs(c.events) do
-    local m = { l:match(v) }
-    if #m > 0 and #c.handlers[k] > 0 then
-      for _, fn in ipairs(c.handlers[k]) do
-        if k == "listen" or k == "ignore" and c.screens[m[1]] then
-          fn(c.screens[m[1]], c)
-        else
-          fn(unpack(m), c)
-        end
-      end
-      return
-    end
-  end
-end
-
 --- A LCDproc client class.
 -- @type LCDproc
 local LCDproc = {
@@ -247,10 +228,29 @@ function LCDproc:poll()
 
     if line then
       if self.debug then print("<<< [poll] " .. line) end
-      do_events(self, line)
+      self:do_events(line)
     end
 
     return line, err
+  end
+end
+
+--- handle server events
+-- @tparam string line response line
+-- @treturn string event type
+function LCDproc:do_events(line)
+  for k, v in pairs(self.events) do
+    local m = { line:match(v) }
+    if #m > 0 and #self.handlers[k] > 0 then
+      for _, fn in ipairs(self.handlers[k]) do
+        if k == "listen" or k == "ignore" and self.screens[m[1]] then
+          fn(self.screens[m[1]])
+        else
+          fn(unpack(m))
+        end
+      end
+      return k
+    end
   end
 end
 
