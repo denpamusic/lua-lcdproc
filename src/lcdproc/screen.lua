@@ -48,7 +48,7 @@ end
 -- @treturn string error description
 function Screen:set_name(name)
   self.name = name
-  return self.server:request(("screen_set %s {%s}"):format(self.id, self.name))
+  return self.server:request(("screen_set %s -name {%s}"):format(self.id, self.name))
 end
 
 --- set screen size
@@ -59,7 +59,7 @@ end
 function Screen:set_size(width, height)
   self.width = width
   self.height = height
-  return self.server:request(("screen_set %s wid %i hgt %i"):format(
+  return self.server:request(("screen_set %s -wid %i -hgt %i"):format(
     self.id,
     self.width,
     self.height))
@@ -71,7 +71,7 @@ end
 -- @treturn string error description
 function Screen:set_priority(priority)
   self.priority = priority
-  return self.server:request(("screen_set %s priority %s"):format(
+  return self.server:request(("screen_set %s -priority %s"):format(
     self.id,
     self.priority))
 end
@@ -82,7 +82,7 @@ end
 -- @treturn string error description
 function Screen:set_heartbeat(heartbeat)
   self.heartbeat = heartbeat
-  return self.server:request(("screen_set %s heartbeat %s"):format(
+  return self.server:request(("screen_set %s -heartbeat %s"):format(
     self.id,
     self.heartbeat))
 end
@@ -93,7 +93,7 @@ end
 -- @treturn string error description
 function Screen:set_backlight(backlight)
   self.backlight = backlight
-  return self.server:request(("screen_set %s backlight %s"):format(
+  return self.server:request(("screen_set %s -backlight %s"):format(
     self.id,
     self.backlight))
 end
@@ -104,7 +104,7 @@ end
 -- @treturn string error description
 function Screen:set_duration(duration)
   self.duration = duration
-  return self.server:request(("screen_set %s duration %i"):format(
+  return self.server:request(("screen_set %s -duration %i"):format(
     self.id,
     self.duration))
 end
@@ -115,7 +115,7 @@ end
 -- @treturn string error description
 function Screen:set_timeout(timeout)
   self.timeout = timeout
-  return self.server:request(("screen_set %s timeout %i"):format(
+  return self.server:request(("screen_set %s -timeout %i"):format(
     self.id,
     self.timeout))
 end
@@ -128,7 +128,7 @@ end
 -- @treturn string error description
 function Screen:set_cursor(cursor, x, y)
   if self.server:request(
-    ("screen_set %s cursor %s cursor_x %i cursor_y %i"):format(
+    ("screen_set %s -cursor %s -cursor_x %i -cursor_y %i"):format(
       self.id,
       self.cursor,
       self.cursor_x,
