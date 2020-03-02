@@ -36,7 +36,7 @@ function Screen.new(server, id)
   local self = setmetatable({}, Screen)
   self.server = server
   self.id = id
-  self.widgets = Screen.widgets
+  self.widgets = {}
   local ret, err = self.server:request("screen_add " .. self.id)
   if not ret then self = nil end
   return self, err

@@ -11,9 +11,9 @@ local appid = "<APPID>"
 --- fetches and decodes json from openweathermap.org
 function api_get(p)
     local url  = ("http://api.openweathermap.org/data/2.5/" ..
-    p .. "?id=%i&appid=%s"):format(cityid, appid)
+    p .. "?id=%i&APPID=%s"):format(cityid, appid)
     local data = http.request(url)
-    return json.decode(data)
+    if data then return json.decode(data) end
 end
 
 --- formats screen lines
@@ -79,10 +79,10 @@ while true do
   local dt = os.date("*t")
   if dt.min % 5 == 0 and dt.sec == 0 then
     -- update current weather data every 5 minutes
-    weather = api_get("weather")
+    weather = api_get("weather") or weather
   elseif dt.min == 0 and dt.sec == 0 then
     -- update forecast weather data every hour
-    forecast = api_get("forecast")
+    forecast = api_get("forecast") or forecast
   end
 
   lcd:poll()

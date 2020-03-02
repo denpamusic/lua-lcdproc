@@ -90,10 +90,9 @@ function LCDproc.new(host, port, opts)
   local self = setmetatable({}, LCDproc)
   opts = opts or {}
   self.debug = opts.debug or false
-  self.screens = LCDproc.screens
-  self.keys = LCDproc.keys
-  self.events = LCDproc.events
-  self.handlers = LCDproc.handlers
+  self.screens = {}
+  self.keys = {}
+  self.handlers = { listen = {}, ignore = {}, keypress = {}, menu = {} }
   self.sock = assert(socket.tcp())
   self.sock:settimeout(opts.timeout or 3)
   local ret, err = self.sock:connect((host or "localhost"), (port or 13666))

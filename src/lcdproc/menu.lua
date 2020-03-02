@@ -664,7 +664,7 @@ Menu.__index = Menu
 -- @treturn Menu the new menu
 function Menu.new(server, menu, id, text, hidden, prev)
   local self = Item.new(Menu, menu, (id or ""), text, hidden, prev)
-  return self:init{ server = server, items = Menu.items }
+  return self:init{ server = server, items = {} }
 end
 
 --- create menu on the server
