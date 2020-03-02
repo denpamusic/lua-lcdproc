@@ -127,16 +127,15 @@ end
 -- @treturn string response from LCDproc server
 -- @treturn string error description
 function Screen:set_cursor(cursor, x, y)
-  if self.server:request(
+  self.cursor = cursor
+  self.cursor_x = x
+  self.cursor_y = y
+  return self.server:request(
     ("screen_set %s -cursor %s -cursor_x %i -cursor_y %i"):format(
       self.id,
       self.cursor,
       self.cursor_x,
-      self.cursor_y)) then
-    self.cursor = cursor
-    self.cursor_x = x
-    self.cursor_y = y
-  end
+      self.cursor_y))
 end
 
 --- add string widget to the screen
