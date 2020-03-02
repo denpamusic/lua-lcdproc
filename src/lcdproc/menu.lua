@@ -57,6 +57,7 @@ function Item:new(menu, id, text, hidden, prev, next)
 end
 
 --- initialize item on the server
+-- @tparam table vars variables to initialize item with
 -- @return initialized item
 -- @treturn string error description
 function Item:init(vars)
@@ -692,6 +693,21 @@ function Menu:update()
       'menu_set_item "%s" %s',
       self.menu.id,
       self.id))
+end
+
+--- go to current menu
+-- @tparam[opt] string parent_id reset menu parent to this id
+-- @treturn string LCDproc server response
+-- @treturn string error description
+function Menu:goto()
+  return self.server:request(('menu_goto "%s"'):format(self.id))
+end
+
+--- set current menu as main
+-- @treturn string LCDproc server response
+-- @treturn string error description
+function Menu:set_main()
+  return self.server:request(('menu_set_main "%s"'):format(self.id))
 end
 
 --- add action to the menu
