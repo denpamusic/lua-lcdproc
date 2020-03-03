@@ -241,7 +241,7 @@ end
 function LCDproc:do_events(line)
   for k, v in pairs(self.events) do
     local m = { line:match(v) }
-    if #m > 0 and #self.handlers[k] > 0 then
+    if #m > 0 then
       for _, fn in ipairs(self.handlers[k]) do
         if k == "listen" or k == "ignore" and self.screens[m[1]] then
           fn(self.screens[m[1]])
@@ -269,13 +269,13 @@ end
 --- register key press event handler
 -- @tparam func fn handler function
 function LCDproc:on_keypress(fn)
-  table.insert(self.handers.keypress, fn)
+  table.insert(self.handlers.keypress, fn)
 end
 
 --- register menu event handler
 -- @tparam func fn handler function
 function LCDproc:on_menu(fn)
-  table.insert(self.handers.menu, fn)
+  table.insert(self.handlers.menu, fn)
 end
 
 --- close connection
