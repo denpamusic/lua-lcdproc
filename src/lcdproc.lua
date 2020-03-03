@@ -212,6 +212,7 @@ function LCDproc:noop()
 end
 
 --- sleep for a given amount of seconds
+-- @tparam int seconds number of seconds to sleep
 -- @treturn string LCDproc server response
 -- @treturn string error description
 function LCDproc:sleep(seconds)
