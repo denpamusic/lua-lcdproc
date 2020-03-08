@@ -84,6 +84,22 @@ function LCDproc.new(host, port, opts)
   return nil, err
 end
 
+--- Helper function to run the callback every interval
+-- @tparam string interval inteval string (i. e. "5m")
+-- Supports "h" for hours, "m" for minutes and "s" for seconds
+-- @tparam func fn callback function
+function LCDproc.every(interval, fn)
+  if not fn then return end
+  local val, unit = interval:match "(%d+)%s?([h|m|s]?)"
+  if val == nil then error(("invalid interval [%s]"):format(interval), 2) end
+  local t = os.date("*t")
+  if (unit == "h" and t.hour % val == 0 and t.min == 0 and t.sec == 0) or
+     (unit == "m" and t.min % val == 0 and t.sec == 0) or
+     ((unit == "s" or unit == nil) and t.sec % val == 0) then
+        return fn()
+  end
+end
+
 --- make request to LCDproc server
 -- @tparam string line
 -- @treturn string LCDproc server response
