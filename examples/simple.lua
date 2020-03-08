@@ -15,13 +15,13 @@ lcd:on_listen(function () active = true end)
 lcd:on_ignore(function () active = false end)
 
 while true do
+  -- poll LCDproc server once per second
+  lcd:poll()
+
   if active then
     -- update time only when screen is active
     screen.widgets.time:set_text(os.date("%H:%M:%S"))
   end
-
-  -- poll LCDproc server once per second
-  lcd:poll()
 end
 
 -- close connection to LCDproc server

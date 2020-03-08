@@ -70,7 +70,7 @@
     <span class="keyword">local</span> url  = (<span class="string">"http://api.openweathermap.org/data/2.5/"</span> ..
     p .. <span class="string">"?id=%i&amp;APPID=%s"</span>):format(cityid, appid)
     <span class="keyword">local</span> data = http.request(url)
-    <span class="keyword">if</span> data <span class="keyword">then</span> <span class="keyword">return</span> json.decode(data) <span class="keyword">end</span>
+    <span class="keyword">return</span> json.decode(data)
 <span class="keyword">end</span>
 
 <span class="comment">--- formats screen lines
@@ -85,67 +85,65 @@
 
 <span class="comment">--- gets table of strings
 </span><span class="keyword">function</span> get_strings(w, f)
-  <span class="keyword">local</span> t = { [<span class="string">"weather_1"</span>] = format_lines(w) }
+  <span class="keyword">local</span> t = { [<span class="string">"w1"</span>] = format_lines(w) }
   <span class="keyword">local</span> n = <span class="number">1</span>
   <span class="keyword">for</span> _, v <span class="keyword">in</span> <span class="global">ipairs</span>(f.list) <span class="keyword">do</span>
     n = n + <span class="number">1</span>
     <span class="keyword">if</span> n &gt; <span class="number">3</span> <span class="keyword">then</span> <span class="keyword">break</span> <span class="keyword">end</span>
     <span class="keyword">if</span> v.dt &gt; w.dt <span class="keyword">then</span>
-      t[<span class="string">"weather_"</span> .. n] = format_lines(v)
+      t[<span class="string">"w"</span> .. n] = format_lines(v)
     <span class="keyword">end</span>
   <span class="keyword">end</span>
   <span class="keyword">return</span> t
 <span class="keyword">end</span>
 
-<span class="comment">--- centers string by padding it with spaces on both sides
-</span><span class="keyword">function</span> center_str(s, l)
-  l = (l <span class="keyword">or</span> <span class="number">20</span>) - #s
-  s = <span class="global">string</span>.rep(<span class="string">' '</span>, <span class="global">math</span>.floor(l/<span class="number">2</span>)) .. s
-  <span class="keyword">return</span> s .. <span class="global">string</span>.rep(<span class="string">' '</span>, <span class="global">math</span>.ceil(l/<span class="number">2</span>))
-<span class="keyword">end</span>
-
 <span class="comment">--- setup weather screens
 </span><span class="keyword">function</span> setup_screens(c, t, ids)
-  <span class="keyword">for</span> _, v <span class="keyword">in</span> <span class="global">ipairs</span>(ids) <span class="keyword">do</span>
-    <span class="keyword">local</span> s = c:add_screen(v)
-    s:add_title(<span class="string">"title"</span>, center_str(t[v][<span class="number">1</span>], c.lcd.width))
-    s:add_string(<span class="string">"one"</span>, <span class="number">1</span>, <span class="number">2</span>, center_str(t[v][<span class="number">2</span>], c.lcd.width))
-    s:add_string(<span class="string">"two"</span>, <span class="number">1</span>, <span class="number">3</span>, center_str(t[v][<span class="number">3</span>], c.lcd.width))
-    s:add_string(<span class="string">"three"</span>, <span class="number">1</span>, <span class="number">4</span>, center_str(t[v][<span class="number">4</span>], c.lcd.width))
+  <span class="keyword">for</span> _, id <span class="keyword">in</span> <span class="global">ipairs</span>(ids) <span class="keyword">do</span>
+    <span class="keyword">if</span> t[id] <span class="keyword">then</span>
+      <span class="keyword">local</span> s = c:add_screen(id)
+      s:add_title(<span class="string">"title"</span>, t[id][<span class="number">1</span>])
+      s:add_string(<span class="string">"one"</span>, <span class="number">1</span>, <span class="number">2</span>, t[id][<span class="number">2</span>])
+      s:add_string(<span class="string">"two"</span>, <span class="number">1</span>, <span class="number">3</span>, t[id][<span class="number">3</span>])
+      s:add_string(<span class="string">"three"</span>, <span class="number">1</span>, <span class="number">4</span>, t[id][<span class="number">4</span>])
+    <span class="keyword">end</span>
+  <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">--- update weather screen
+</span><span class="keyword">local</span> <span class="keyword">function</span> update_screen(s, t)
+  <span class="keyword">if</span> t[s.id] <span class="keyword">then</span>
+    s.widgets.title:set_text(t[s.id][<span class="number">1</span>])
+    s.widgets.one:set_text(t[s.id][<span class="number">2</span>])
+    s.widgets.two:set_text(t[s.id][<span class="number">3</span>])
+    s.widgets.three:set_text(t[s.id][<span class="number">4</span>])
   <span class="keyword">end</span>
 <span class="keyword">end</span>
 
 <span class="keyword">local</span> weather = api_get(<span class="string">"weather"</span>)
 <span class="keyword">local</span> forecast = api_get(<span class="string">"forecast"</span>)
-<span class="keyword">local</span> strings = get_strings(weather, forecast)
-
 <span class="keyword">local</span> lcd = LCDproc.new(<span class="string">"localhost"</span>, <span class="number">13666</span>)
-lcd:set_name(<span class="string">"weather"</span>)
-setup_screens(lcd, strings, { <span class="string">"weather_1"</span>, <span class="string">"weather_2"</span>, <span class="string">"weather_3"</span> })
+lcd:set_name(<span class="string">"Weather"</span>)
+setup_screens(lcd, get_strings(weather, forecast), { <span class="string">"w1"</span>, <span class="string">"w2"</span>, <span class="string">"w3"</span> })
 
-<span class="comment">-- update strings when screen is shown
-</span>lcd:on_listen(<span class="keyword">function</span> (s, c)
-  strings = get_strings(weather, forecast)
-  s.widgets.title:set_text(center_str(strings[s.id][<span class="number">1</span>], c.lcd.width))
-  s.widgets.one:set_text(center_str(strings[s.id][<span class="number">2</span>], c.lcd.width))
-  s.widgets.two:set_text(center_str(strings[s.id][<span class="number">3</span>], c.lcd.width))
-  s.widgets.three:set_text(center_str(strings[s.id][<span class="number">4</span>], c.lcd.width))
-<span class="keyword">end</span>)
+<span class="comment">-- store current active screen
+</span><span class="keyword">local</span> listen = <span class="keyword">nil</span>
+lcd:on_listen(<span class="keyword">function</span> (s) listen = s <span class="keyword">end</span>)
+lcd:on_ignore(<span class="keyword">function</span> () listen = <span class="keyword">nil</span> <span class="keyword">end</span>)
 
 <span class="keyword">while</span> <span class="keyword">true</span> <span class="keyword">do</span>
-  <span class="keyword">local</span> dt = <span class="global">os</span>.date(<span class="string">"*t"</span>)
-  <span class="keyword">if</span> dt.min % <span class="number">5</span> == <span class="number">0</span> <span class="keyword">and</span> dt.sec == <span class="number">0</span> <span class="keyword">then</span>
-    <span class="comment">-- update current weather data every 5 minutes
-</span>    weather = api_get(<span class="string">"weather"</span>) <span class="keyword">or</span> weather
-  <span class="keyword">elseif</span> dt.min == <span class="number">0</span> <span class="keyword">and</span> dt.sec == <span class="number">0</span> <span class="keyword">then</span>
-    <span class="comment">-- update forecast weather data every hour
-</span>    forecast = api_get(<span class="string">"forecast"</span>) <span class="keyword">or</span> forecast
-  <span class="keyword">end</span>
-
-  lcd:poll()
+  <span class="comment">-- poll LCDproc server once per second
+</span>  lcd:poll()
+  <span class="comment">-- update current weather data every five minutes
+</span>  LCDproc.every(<span class="string">"5m"</span>, <span class="keyword">function</span> () weather = api_get(<span class="string">"weather"</span>) <span class="keyword">end</span>)
+  <span class="comment">-- update weather forecast data every two hours
+</span>  LCDproc.every(<span class="string">"2h"</span>, <span class="keyword">function</span> () forecast = api_get(<span class="string">"forecast"</span>) <span class="keyword">end</span>)
+  <span class="comment">-- update currently active screen
+</span>  <span class="keyword">if</span> listen <span class="keyword">then</span> update_screen(listen, get_strings(weather, forecast)) <span class="keyword">end</span>
 <span class="keyword">end</span>
 
-lcd:close()
+<span class="comment">-- close connection to LCDproc server
+</span>lcd:close()
 </pre>
 
 
@@ -153,7 +151,7 @@ lcd:close()
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2020-03-03 23:39:27 </i>
+<i style="float:right;">Last updated 2020-03-09 01:06:11 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
