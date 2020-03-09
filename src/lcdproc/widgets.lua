@@ -21,11 +21,11 @@ Widget.__index = Widget
 -- @return the new widget
 function Widget:new(screen, id, type)
   setmetatable(self, { __index = Widget })
-  local newinst = setmetatable({}, self)
-  newinst.id = id
-  newinst.screen = screen
-  newinst.type = type
-  return newinst
+  local item = setmetatable({}, self)
+  item.id = id
+  item.screen = screen
+  item.type = type
+  return item
 end
 
 --- initialize widget on the server
@@ -153,10 +153,12 @@ end
 -- This SHOULD NOT be used directly.
 -- @type Bar
 local Bar = {
-  x = 0,         -- horizontal position
-  y = 0,         -- vertical position
-  length = 0,    -- progress bar length
-  type = nil     -- progress bar type
+  x = 0,                -- horizontal position
+  y = 0,                -- vertical position
+  length = 0,           -- progress bar length
+  type = nil            -- progress bar type
+  horizontal = "hbar",  -- horizontal bar type
+  vertical = "vbar"     -- vertical bar type
 }
 Bar.__index = Bar
 
@@ -169,8 +171,8 @@ Bar.__index = Bar
 -- @tparam string type progress bar type (hbar, vbar)
 -- @return the new bar
 function Bar:new(screen, id, x, y, length, type)
-  local newinst = Widget.new(Bar, screen, id, type)
-  return newinst:init{ x = x, y = y, length = length }
+  local bar = Widget.new(Bar, screen, id, type)
+  return bar:init{ x = x, y = y, length = length }
 end
 
 --- update progress bar on the server
@@ -220,7 +222,7 @@ HBar.__index = HBar
 -- @tparam int length progress bar length
 -- @treturn HBar a new horizontal progress bar widget
 function HBar.new(screen, id, x, y, length)
-  return Bar.new(HBar, screen, id, x, y, length, "hbar")
+  return Bar.new(HBar, screen, id, x, y, length, Bar.horizontal)
 end
 
 --- Vertical progress bar widget class.
@@ -238,7 +240,7 @@ VBar.__index = VBar
 -- @treturn string LCDproc server response
 -- @treturn string error description
 function VBar.new(screen, id, x, y, length)
-  return Bar.new(VBar, screen, id, x, y, length, "vbar")
+  return Bar.new(VBar, screen, id, x, y, length, Bar.vertical)
 end
 
 --- Icon widget class.

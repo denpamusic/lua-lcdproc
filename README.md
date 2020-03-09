@@ -22,7 +22,7 @@ $ opkg update && opkg install lua-lcdproc
 local LCDproc = require "lcdproc"
 
 -- firstly create client instance
-local lcd = LCDproc.new("localhost", 13666)
+local lcd = LCDproc("localhost", 13666)
 
 -- then create some screens...
 local screen = lcd:add_screen("my_screen")

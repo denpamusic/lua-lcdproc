@@ -11,7 +11,7 @@ local appid = "<APPID>"
 --- fetches and decodes json from openweathermap.org
 function api_get(p)
     local url  = ("http://api.openweathermap.org/data/2.5/" ..
-    p .. "?id=%i&APPID=%s"):format(cityid, appid)
+    p .. "?id=%i&units=metric&APPID=%s"):format(cityid, appid)
     local data = http.request(url)
     return json.decode(data)
 end
@@ -63,9 +63,12 @@ local function update_screen(s, t)
   end
 end
 
+-- get current weather
 local weather = api_get("weather")
+-- get 5 day weather forecast
 local forecast = api_get("forecast")
-local lcd = LCDproc.new("localhost", 13666)
+
+local lcd = LCDproc("localhost", 13666)
 lcd:set_name("Weather")
 setup_screens(lcd, get_strings(weather, forecast), { "w1", "w2", "w3" })
 

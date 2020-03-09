@@ -1,6 +1,6 @@
 local LCDproc = require "lcdproc"
 
-local lcd = LCDproc.new("localhost", 13666)
+local lcd = LCDproc("localhost", 13666)
 lcd:set_name("Simple Clock")
 
 -- create clock screen

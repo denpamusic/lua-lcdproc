@@ -46,14 +46,14 @@ Item.__index = Item
 -- @return the new item
 function Item:new(menu, id, text, hidden, prev, next)
   setmetatable(self, { __index = Item })
-  local newinst = setmetatable({}, self)
-  newinst.menu = menu
-  newinst.id = id
-  newinst.text = text
-  newinst.hidden = hidden or false
-  newinst.prev = prev
-  newinst.next = next
-  return newinst
+  local item = setmetatable({}, self)
+  item.menu = menu
+  item.id = id
+  item.text = text
+  item.hidden = hidden or false
+  item.prev = prev
+  item.next = next
+  return item
 end
 
 --- initialize item on the server

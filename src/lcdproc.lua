@@ -61,6 +61,7 @@ LCDproc.handlers = {
 }
 LCDproc.__index = LCDproc
 
+setmetatable(LCDproc, { __call = function (cls, ...) return cls.new(...) end })
 
 --- create client instance
 -- @tparam[opt] string host LCDproc server host (localhost)
