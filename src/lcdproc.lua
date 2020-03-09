@@ -133,7 +133,7 @@ function LCDproc:hello()
       version = line:match "LCDproc ([0-9%.]+)",
       protocol = line:match "protocol ([0-9%.]+)"
     }
-    self.lcd = {
+    self.display = {
       width = line:match " wid ([0-9]+)",
       height = line:match " hgt ([0-9]+)",
       cell_width = line:match " cellwid ([0-9]+)",

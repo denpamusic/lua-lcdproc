@@ -156,7 +156,7 @@ local Bar = {
   x = 0,                -- horizontal position
   y = 0,                -- vertical position
   length = 0,           -- progress bar length
-  type = nil            -- progress bar type
+  type = nil,           -- progress bar type
   horizontal = "hbar",  -- horizontal bar type
   vertical = "vbar"     -- vertical bar type
 }
