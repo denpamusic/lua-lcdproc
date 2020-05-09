@@ -108,19 +108,24 @@ end
 function LCDproc:request(line)
   if self.debug then print(">>> " .. line) end
   self.sock:send(trim(line) .. "\n")
-  local line, err = self.sock:receive("*l")
-  if self.debug then print("<<< " .. line) end
 
-  if not line then
-    return nil, err
-  elseif line:match "^success" or line:match "^connect" then
-    return trim(line)
-  else
-    err = line:match "huh%? (.*)"
-    if err then
+  local line, err
+  repeat
+    line, err = self.sock:receive("*l")
+    if self.debug then print("<<< " .. line) end
+    if not line then
       return nil, err
+    elseif line:match "^listen" or line:match "^ignore" then
+      self:do_events(line)
+    else
+      err = line:match "huh%? (.*)"
+      if err then
+        return nil, err
+      end
     end
-  end
+  until line:match "^success" or line:match "^connect"
+
+  return trim(line)
 end
 
 --- initiate the LCDproc session
