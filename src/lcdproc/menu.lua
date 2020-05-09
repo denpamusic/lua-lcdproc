@@ -132,7 +132,7 @@ end
 local Action = {
   result = nil  -- what to do when this item is selected
 }
-Action.__index = Item
+Action.__index = Action
 
 --- add action to the menu
 -- @tparam Menu menu Menu instance

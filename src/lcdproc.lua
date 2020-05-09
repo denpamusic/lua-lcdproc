@@ -153,7 +153,7 @@ end
 -- @treturn string error description
 function LCDproc:set_name(name)
   self.name = name
-  return self:request(string.format("client_set name %s", self.name))
+  return self:request(string.format("client_set name {%s}", self.name))
 end
 
 --- add new screen
