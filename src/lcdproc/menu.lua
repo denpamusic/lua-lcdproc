@@ -698,8 +698,8 @@ end
 --- go to current menu
 -- @tparam[opt] string parent_id reset menu parent to this id
 -- @treturn string LCDproc server response
--- @treturn string error description
-function Menu:goto()
+-- @treturn stri-ng error description
+function Menu:go_to()
   return self.server:request(('menu_goto "%s"'):format(self.id))
 end
 
