@@ -12,6 +12,17 @@ local function btos(b)
   if b then return "true" else return "false" end
 end
 
+--- unpacks table (with fallback for lua 5.1)
+-- @tparam table t table to unpack
+-- @return unpacked table
+local function unpack_table(t)
+  if not table.unpack then
+    return unpack(t)
+  end
+
+  return table.unpack(t)
+end
+
 --- search table for value
 -- @param s value to search for
 -- @tparam table t table in which search will be performed
@@ -119,7 +130,7 @@ end
 -- @param ... arguments for a pattern
 -- @treturn string request line with added optional args
 function Item:with_args(pattern, ...)
-  local line = string.format(pattern, unpack(arg))
+  local line = string.format(pattern, unpack_table({...}))
   if self.text then line = line .. " -text {" .. self.text .. "}" end
   if self.hidden then line = line .. " -is_hidden true " end
   if self.prev then line = line .. " -prev " .. (self.prev.id or self.prev) end
